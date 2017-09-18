@@ -1,0 +1,50 @@
+<body class="user_show">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">The Space</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/apod">APOD</a></li>
+        <li><a href="/images">Explore</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
+        <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
+        <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="_method" value="delete">
+          <input id='logoutbtn' type="submit" name="" value="Log Out">
+        </form>
+      </ul>
+    </div>
+  </nav>
+  
+  <h1><%= @user.first_name %> <%= @user.last_name%></h1>
+  <div class="usershow_info">
+    <h4><%= @user.email %></h4>
+    <h4><%= @user.state %></h4>
+    <h4><%= @user.zipcode %></h4>
+  </div>
+
+  <div id="usershow_hoster">
+    <% @events.each do |event| %>
+      <div class="usershow_hoster">
+        <h5 class='event_title'><a href="/events/<%= event.id %>"><%= event.title %></a></h5>
+        <h6><i><%= event.date.strftime('%B %d %Y')%></i> at <%= event.time.strftime("%I:%M%p") %></h6>
+        <h5 class='event_address'><%= event.address %>, <%= event.city %>, <%= event.state %>, <%= event.zipcode %></h5>
+        <h6 class='event_description'><%= event.description %></h6>
+        <hr>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="usershow_attending">
+    <% @attending.each do |event| %>
+      <div class="usershow_attending">
+        <h5 class='event_title'><a href="/events/<%= event.id %>"><%= event.event.title %></a></h5>
+        <h6><i><%= event.event.date.strftime('%B %d %Y')%></i> at <%= event.event.time.strftime("%I:%M%p") %></h6>
+        <h5 class='event_address'><%= event.event.address %>, <%= event.event.city %>, <%= event.event.state %>, <%= event.event.zipcode %></h5>
+        <h6 class='event_description'><%= event.event.description %></h6>
+        <hr>
+      </div>
+    <% end %>
+  </div>
+</body>

@@ -1,0 +1,33 @@
+<body class="user_profile">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">The Space</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/apod">APOD</a></li>
+        <li><a href="/images">Explore</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
+        <li><a class="disabled" href="/users/<%= current_user.id %>/profile">My Profile</a></li>
+        <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="_method" value="delete">
+          <input id='logoutbtn' type="submit" name="" value="Log Out">
+        </form>
+      </ul>
+    </div>
+  </nav>
+  
+
+  <h4>Welcome, <%= @user.first_name %></h4>
+  <h1> this is current user profile page</h1>
+  <h3>using it for show user's attending events</h3>
+  <h3>show user hosts events</h3>
+  <h4>User upload photos here on this page </h4>
+  <hr>
+  <% if flash[:notice] %>
+    <% flash[:notice].each do |notice| %>
+      <h5 class="notice_message"><%= notice %></h5>
+    <% end %>
+  <% end %>
+  <h3>Update my profile <a href="/users/<%= @user.id %>/edit">HERE</a></h3>
+</body>

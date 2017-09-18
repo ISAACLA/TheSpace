@@ -1,0 +1,141 @@
+// Place all the styles related to the Dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.index{
+  background: url(/mainindex3.jpg);
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+  background-color: rgba(31, 52, 238, 0.48)
+}
+
+body.apod{
+  background-color: #191919;
+  color: rgb(255, 253, 208);
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 35px;
+  line-height: 40px;
+  font-family: 'Lato', sans-serif;
+  color: rgb(255, 253, 208);
+  height: 160px;
+  overflow:hidden;
+}
+
+.visible {
+  font-weight:600;
+  overflow:hidden;
+  height:40px;
+  padding:0 40px;
+
+  &:before {
+    // content:'[';
+    left: 0;
+    line-height:40px;
+  }
+  &:after {
+    // content:']';
+    position:absolute;
+    right: 0;
+    line-height:40px;
+  }
+  &:after, &:before {
+    position:absolute;
+    top:0;
+    color:#16a085;
+    font-size:42px;
+    -webkit-animation-name: opacity;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: opacity;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+
+  }
+}
+
+p {
+  display:inline;
+  float:left;
+  margin:0;
+}
+
+ul.scroll {
+  margin-top:0;
+  padding-left:110px;
+  text-align:left;
+  list-style:none;
+  -webkit-animation-name: change;
+  -webkit-animation-duration: 6s;
+  -webkit-animation-iteration-count: infinite;
+  animation-name: change;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+}
+
+.scroll{
+  line-height:40px;
+  margin-left: 200px;
+}
+
+.dash-li{
+  line-height:40px;
+  margin-left: 10px;
+}
+
+
+
+@-webkit-keyframes opacity {
+  0%, 100% {opacity:0;}
+  50% {opacity:1;}
+}
+
+@-webkit-keyframes change {
+  0%, 12%, 100% {transform:translateY(0);}
+  17%,29% {transform:translateY(-25%);}
+  34%,46% {transform:translateY(-50%);}
+  51%,63% {transform:translateY(-75%);}
+  68%,80% {transform:translateY(-50%);}
+  85%,97% {transform:translateY(-25%);}
+}
+
+@keyframes opacity {
+  0%, 100% {opacity:0;}
+  50% {opacity:1;}
+}
+
+@keyframes change {
+  0%, 12%, 100% {transform:translateY(0);}
+  17%,29% {transform:translateY(-25%);}
+  34%,46% {transform:translateY(-50%);}
+  51%,63% {transform:translateY(-75%);}
+  68%,80% {transform:translateY(-50%);}
+  85%,97% {transform:translateY(-25%);}
+}
+
+.nav-extended{
+  background-color:rgb(46, 54, 68)
+}
+
+#apod_img_id{
+    width: 90%;
+    // height: 400px;
+    border-radius: 10px;
+    // border: 2px solid grey;
+}
+
+#apod_explaination{
+  text-align: justify;
+  font-size: medium;
+}
+
+#righttext{
+  padding-right: 4%;
+}

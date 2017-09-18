@@ -1,0 +1,107 @@
+// Place all the styles related to the Events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.event_new{
+  background: url(/e-new3.jpeg);
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+  background-color: rgba(31, 52, 238, 0.48);
+  color: rgb(255, 253, 208);
+}
+
+body.event_index{
+  background: url(/event_index.jpg);
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+  background-color: rgba(31, 52, 238, 0.48);
+  color: rgb(255, 253, 208);
+}
+
+body.event_show{
+  background: url(/event_show.jpg);
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+  background-color: rgba(31, 52, 238, 0.48);
+  color: rgb(255, 253, 208);
+}
+
+#event_index{
+  padding:3%
+}
+
+.my_state_events{
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.other_events{
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.my_state_event{
+  width: 90%;
+  background-color: rgba(48, 44, 43, 0.7);
+  padding: 2%;
+  border-radius: 5px;
+  border: 2px solid grey;
+  margin: auto;
+  margin-top:20px;
+}
+
+.other_event{
+  width: 90%;
+  background-color: rgba(48, 44, 43, 0.7);
+  padding: 2%;
+  border-radius: 5px;
+  border: 2px solid grey;
+  margin: auto;
+}
+
+.event_description{
+  font-family: serif;
+}
+
+.event_title{
+  font-family: cursive;
+}
+
+.event_address{
+  font-family: fantasy;
+}
+
+.white_link{
+  color:white;
+  display: block;
+  text-align: center;
+  background-color: #26A69A;
+  border-radius: 3px;
+  font-size: large;
+}
+
+#event_attendees{
+  height: 600px;
+  overflow-y: scroll;
+
+}
+
+#event_attendee{
+  padding: 4%;
+  border: 1px solid grey;
+  background-color: rgba(48, 44, 43, 0.7);
+  width: 90%;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 1%;
+}
+
+#event_show{
+  padding: 5%;
+}

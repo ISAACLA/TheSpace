@@ -1,0 +1,52 @@
+// Place all the styles related to the Image controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.imageshow{
+  color:rgb(255, 253, 208);
+  background-position: center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+  background-color: rgba(219, 214, 217, 0.96);
+
+}
+
+#information.show{
+  z-index:0;
+  background-color: rgba(18, 22, 19, 0.5);
+  height: auto;
+  width: 85%;
+  padding: 1% 2% 1% 2%;
+  left: 50%;
+  right: 50%;
+  margin: auto;
+  border-radius: 10px;
+  border: 5px solid;
+}
+
+#show_title{
+  text-align: center;
+  // font-size: 20px;
+  font-family: fantasy;
+}
+
+#show_explanation{
+  text-align: justify;
+  font-family: serif;
+  margin-top: -15px;
+  // font-size: 20px;
+}
+
+#button{
+  position:fixed;
+  bottom: 10%;
+  left: 40%;
+  margin: auto;
+}
+
+#information.hide{
+  z-index: -2;
+  background-color: transparent;
+  color: transparent;
+}

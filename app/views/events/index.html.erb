@@ -1,0 +1,120 @@
+<body class="event_index">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">The Space</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/apod">APOD</a></li>
+        <li><a href="/images">Explore</a></li>
+        <li><a class="disabled" href="/events">Events</a></li>
+        <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
+        <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
+        <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="_method" value="delete">
+          <input id='logoutbtn' type="submit" name="" value="Log Out">
+        </form>
+      </ul>
+    </div>
+  </nav>
+
+  <br>
+
+  <h5>Create a new event <a href="/events/new">HERE</a></h5>
+
+  <% if flash[:notice] %>
+    <% flash[:notice].each do |notice| %>
+      <h5 class="notice_message"><%= notice %></h5>
+    <% end %>
+  <% end %>
+
+  <div id="event_index" class="row">
+    <div class="col s6">
+      <h4 style="text-align:center">Events in <%= current_user.state %></h4>
+      <hr>
+      <div class="my_state_events">
+        <% @my_state_events.each do |event| %>
+          <div class="my_state_event">
+            <h5 class='event_title'><a href="/events/<%= event.id %>"><%= event.title %></a></h5>
+            <h6><i><%= event.date.strftime('%B %d %Y')%></i> at <%= event.time.strftime("%I:%M%p") %></h6>
+            <h5 class='event_address'><%= event.address %>, <%= event.city %>, <%= event.state %>, <%= event.zipcode %></h5>
+            <h6 class='event_description'><%= event.description %></h6>
+            <hr>
+            <% if event.user == current_user %>
+              <div class="row">
+                <div class="col s6">
+                  <a class="white_link" href="/events/<%= event.id %>/edit">Edit</a>
+                </div>
+                <div class="col s6">
+                  <a class="white_link" href="/events/<%= event.id%>" data-method='delete' data-confirm="Are you sure to delete?">Delete</a>
+                </div>
+              </div>
+            <% end %>
+            <% unless event.user_id == current_user.id %>
+            <% unless event.users.include?(current_user) %>
+              <form action="/attendees" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+                <input type="hidden" name="attendee[event_id]" value="<%= event.id %>">
+                <input class="joinbtn" type="submit" name="" value="Join">
+              </form>
+            <% else %>
+            <div class="row">
+              <div class="col s6">
+                <span class="joining">Joining</span>
+              </div>
+              <div class="col s6">
+                |  <a class="cancel_join" data-method='delete' data-confirm="Are you sure?" href="/attendees/<%= event.id %>">Cancel</a>  
+              </div>
+            </div>
+            <% end %>
+            <% end %>
+          </div>
+        <% end %>
+        <% if flash[:errors] %>
+          <% flash[:errors].each do |error| %>
+            <h6 style="color:red"><%= error %></h6>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col s6">
+      <h4 style="text-align:center">Events in other states</h4>
+      <hr>
+      <div class="other_events">
+        <% @other_events.each do |e| %>
+          <div class="other_event">
+            <h5 class='event_title'><a href="/events/<%= e.id %>"><%= e.title %></a></h5>
+            <h6><i><%= e.date.strftime('%B %d %Y')%></i> at <%= e.time.strftime("%I:%M%p") %></h6>
+            <h5 class='event_address'><%= e.address %>, <%= e.city %>, <%= e.state %>, <%= e.zipcode %></h5>
+            <h6 class='event_description'><%= e.description %></h6>
+            <hr>
+            <% if e.user == current_user %>
+              <div class="row">
+                <div class="col s6">
+                  <a class="white_link" href="/events/<%= event.id %>/edit">Edit</a>
+                </div>
+                <div class="col s6">
+                  <a class="white_link" href="/events/<%= event.id%>" data-method='delete' data-confirm="Are you sure to delete?">Delete</a>
+                </div>
+              </div>
+            <% end %>
+            <% unless e.user_id == current_user.id %>
+            <% unless e.users.include?(current_user) %>
+              <form action="/attendees" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+                <input type="hidden" name="attendee[event_id]" value="<%= e.id %>">
+                <button>Join</button>
+              </form>
+            <% else %>
+              <span class="joining">Joining</span> | <a class="cancel_join" data-method='delete' data-confirm="Are you sure?" href="/attendees/<%= e.id %>">Cancel</a>
+            <% end %>
+            <% end %>
+
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+</body>

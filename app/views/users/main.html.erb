@@ -1,0 +1,23 @@
+<body class="dashboard">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">The Space</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/apod">APOD</a></li>
+        <li><a href="/images">Explore</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a class="disabled" href="/users/<%= current_user.id %>/main">Dashboard</a></li>
+        <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
+        <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="_method" value="delete">
+          <input id='logoutbtn' type="submit" name="" value="Log Out">
+        </form>
+      </ul>
+    </div>
+  </nav>
+
+
+  <h4>Welcome, <%= @user.first_name %> <%= @user.last_name %></h4>
+
+</body>
