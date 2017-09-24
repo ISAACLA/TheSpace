@@ -18,17 +18,42 @@
     </div>
   </nav>
 
-  <div class="row">
-    <div class="col s8">
-      <div id="event_show">
-        <h3 class="event_title"><%= @event.title %></h3>
-        <h4><i><%= @event.date.strftime('%B %d %Y')%></i> at <%= @event.time.strftime("%I:%M%p") %></i></h4>
-        <h4 class="event_address"><%= @event.address %>, <%= @event.city %>, <%= @event.state %> <%= @event.zipcode %></h4>
-        <h4>Hoster: <%= @event.user.first_name %> <%= @event.user.last_name %></h4>
-        <h4 class="event_description"><%= @event.description %></h4>
-        <hr>
-        <br>
-        <% if @event.user == current_user %>
+  <br>
+  <br>
+  <br>
+
+  <div class="container">
+    <ul class="collapsible" data-collapsible="accordion">
+      <li>
+        <div id="show-header"><i class="medium material-icons">event</i> &nbsp; <%= @event.title %></div>
+        <!-- <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div> -->
+      </li>
+      <li>
+        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">date_range</i>&nbsp; &nbsp; DATE </div>
+        <div class="collapsible-body"><span><%= @event.date.strftime('%B %d %Y')%></span></div>
+      </li>
+      <li>
+        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">access_time</i>&nbsp; &nbsp; TIME</div>
+        <div class="collapsible-body"><span><%= @event.time.strftime("%I:%M %p") %></span></div>
+      </li>
+      <li>
+        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">place</i>&nbsp; &nbsp; Location</div>
+        <div class="collapsible-body"><span><%= @event.address %>, <%= @event.city %>, <%= @event.state %> <%= @event.zipcode %></span></div>
+      </li>
+      <li>
+        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">person_outline</i>&nbsp; &nbsp; Hoster</div>
+        <div class="collapsible-body"><span>
+          <a href="/users/<%= @event.user.id %>/show"> <%= @event.user.first_name %> <%= @event.user.last_name %> </a>
+        </span></div>
+      </li>
+      <li>
+        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">message</i>&nbsp; &nbsp; Description</div>
+        <div class="collapsible-body"><span><%= @event.description %></span></div>
+      </li>
+      <li>
+        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">details</i>&nbsp; &nbsp; Action</div>
+        <div class="collapsible-body"><span>
+          <% if @event.user == current_user %>
           <div class="row">
             <div class="col s6">
               <a class="white_link" href="/events/<%= @event.id %>/edit">Edit</a>
@@ -37,33 +62,43 @@
               <a class="white_link" href="/events/<%= @event.id%>" data-method='delete' data-confirm="Are you sure to delete?">Delete</a>
             </div>
           </div>
-        <% end %>
-        <% unless @event.user_id == current_user.id %>
-        <% unless @event.users.include?(current_user) %>
+          <% end %>
+          <% unless @event.user_id == current_user.id %>
+          <% unless @event.users.include?(current_user) %>
           <form action="/attendees" method="post">
             <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
             <input type="hidden" name="attendee[event_id]" value="<%= @event.id %>">
-            <input class="joinbtn" type="submit" name="" value="Join">
+            <input class='waves-effect btn' type="submit" name="" value="Join">
           </form>
-        <% else %>
-          <span class="joining">Joining</span> | <a class="cancel_join" data-method='delete' data-confirm="Are you sure?" href="/attendees/<%= @event.id %>">Cancel</a>
-        <% end %>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="col s4">
-      <div id="goinglist" style="margin-top:30px;">
-        <h5 style="text-align:center" ><i>Attendees</i></h5>
-        <hr>
-        <div id="event_attendees">
-          <% @event.attendees.each do |attendee| %>
-          <h5 id="event_attendee"> <a href="/users/<%= attendee.user.id %>/show"><%= attendee.user.first_name %>  <%= attendee.user.last_name %></h5></a>
+          <% else %>
+          <div class="row">
+            <div class="col s6">
+              <span class="joining">Joining</span>
+            </div>
+            <div class="col s6">
+              <a class="white_link" data-method='delete' data-confirm="Are you sure?" href="/attendees/<%= @event.id %>">Cancel</a>
+            </div>
+          </div>
           <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
+          <% end %>
+        </span></div>
+      </li>
+      <li>
+        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">people</i>&nbsp; &nbsp; Attendees</div>
+        <div class="collapsible-body"><span>
 
+          <ul id="collection-item" class="collection">
+            <% @event.attendees.each do |attendee| %>
+              <li id="collection-item"  class="collection-item">
+                <a href="/users/<%= attendee.user.id %>/show"><%= attendee.user.first_name %> <%= attendee.user.last_name %></a>
+              </li>
+            <% end %>
+          </ul>
+
+        </span></div>
+      </li>
+    </ul>
+
+    </div>
 
 </body>

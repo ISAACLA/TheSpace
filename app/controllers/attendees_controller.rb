@@ -4,7 +4,7 @@ class AttendeesController < ApplicationController
     attendee = Attendee.new(attendee_params)
     if attendee.save
       flash[:notice]=["Have fun at the event."]
-      redirect_to '/events'
+      redirect_to :back
     else
       flash[:errors]=attendee.errors.full_messages
       redirect_to :back

@@ -20,4 +20,55 @@
 
   <h4>Welcome, <%= @user.first_name %> <%= @user.last_name %></h4>
 
+  <div class="container">
+    <h4 style="text-align:center">Events in my state - <%= current_user.state %></h4>
+    <hr>
+    <div class="my_state_events">
+      <% @my_state_events.each do |event| %>
+        <div class="my_state_event">
+          <h5 class='event_title'><a href="/events/<%= event.id %>"><%= event.title %></a></h5>
+          <h6><i><%= event.date.strftime('%B %d %Y')%></i> at <%= event.time.strftime("%I:%M%p") %></h6>
+          <h5 class='event_address'><%= event.address %>, <%= event.city %>, <%= event.state %>, <%= event.zipcode %></h5>
+          <h6 class='event_description'><%= event.description %></h6>
+          <hr>
+          <% if event.user == current_user %>
+            <div class="row">
+              <div class="col s6">
+                <a class="white_link" href="/events/<%= event.id %>/edit">Edit</a>
+              </div>
+
+              <div class="col s6">
+                <a class="white_link" href="/events/<%= event.id%>" data-method='delete' data-confirm="Are you sure to delete?">Delete</a>
+              </div>
+            </div>
+          <% end %>
+          <% unless event.user_id == current_user.id %>
+          <% unless event.users.include?(current_user) %>
+            <form action="/attendees" method="post">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+              <input type="hidden" name="attendee[event_id]" value="<%= event.id %>">
+              <input class="joinbtn" type="submit" name="" value="Join">
+            </form>
+          <% else %>
+            <div class="row">
+              <div class="col s6">
+                <span class="joining">Joining</span>
+              </div>
+
+              <div class="col s6">
+              |  <a class="cancel_join" data-method='delete' data-confirm="Are you sure?" href="/attendees/<%= event.id %>">Cancel</a>
+              </div>
+            </div>
+          <% end %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+          <h6 style="color:red"><%= error %></h6>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </body>

@@ -14,10 +14,12 @@ class UsersController < ApplicationController
 
   def main
     @user = User.find(current_user.id)
+    @my_state_events = Event.where(state:"#{@user.state}").order(created_at: :desc)
+    @other_events = Event.where.not(state:"#{@user.state}").order(created_at: :desc)
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
     @events = Event.where(user_id:@user.id)
     @attending = Attendee.where(user_id:@user.id)
   end

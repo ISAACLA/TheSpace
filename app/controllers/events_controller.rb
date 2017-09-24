@@ -3,6 +3,13 @@ class EventsController < ApplicationController
     @user = User.find(current_user.id)
     @my_state_events = Event.where(state:"#{@user.state}").order(created_at: :desc)
     @other_events = Event.where.not(state:"#{@user.state}").order(created_at: :desc)
+
+    @state_events = Event.where(state:params[:state]).order(created_at: :desc)
+    @state = params[:state]
+
+    # flash[:notice] = ['Have fun']
+
+
   end
 
   def new
@@ -19,6 +26,11 @@ class EventsController < ApplicationController
       redirect_to :back
     end
   end
+
+  # def state
+  #   @CA_events= Event.where(state:params[:state])
+  #   redirect_to "/events"
+  # end
 
   def show
     @event = Event.find(params[:id])
@@ -37,7 +49,7 @@ class EventsController < ApplicationController
     else
       flash[:errors] = event.errors.full_messages
       redirect_to :back
-    end 
+    end
   end
 
   def destroy

@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   delete 'events/:id' => 'events#destroy'
   get 'events/:id/edit' => 'events#edit'
   patch 'events/:id' => 'events#update'
+  get 'events/state/:state' => 'events#index'
+  
 
   post 'attendees' => 'attendees#create'
   delete 'attendees/:id' => 'attendees#destroy'

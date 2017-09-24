@@ -1,2 +1,13 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
+
+// document.addEventListener('turbolinks:load', function(){
+//   $('.collapsible').collapsible();
+// });
+
+// $(document).ready(function(){
+document.addEventListener('turbolinks:load', function(){
+  $('.collapsible').collapsible();
+  // $('ul.tabs').tabs('select_tab', 'tab_id');
+  $('ul.tabs').tabs();
+});

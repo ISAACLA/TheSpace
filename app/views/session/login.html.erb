@@ -29,9 +29,16 @@
 
     <% if flash[:errors] %>
       <% flash[:errors].each do |error| %>
-        <h5><%= error %></h5>
+        <h5 class="error_message"><%= error %></h5>
       <% end %>
     <% end %>
+
+    <% if flash[:notice] %>
+      <% flash[:notice].each do |notice| %>
+        <h5 class="notice_message"><%= notice %></h5>
+      <% end %>
+    <% end %>
+    
     <div class="container-fluid">
         <div class="row">
 

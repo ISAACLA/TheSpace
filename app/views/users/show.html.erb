@@ -16,13 +16,71 @@
       </ul>
     </div>
   </nav>
-  
+
   <h1><%= @user.first_name %> <%= @user.last_name%></h1>
   <div class="usershow_info">
     <h4><%= @user.email %></h4>
     <h4><%= @user.state %></h4>
     <h4><%= @user.zipcode %></h4>
   </div>
+
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Card Title</span>
+          <h6>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</h6>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <ul class="collection">
+
+      <li class="collection-item avatar">
+        <!-- <i class="material-icons circle green">title</i> -->
+        <span class="title">Hosting</span>
+        <h6>First Line <br>
+          Second Line
+        </h6>
+      </li>
+
+      <li class="collection-item avatar">
+        <i class="material-icons circle">folder</i>
+        <span class="title">Title</span>
+        <p>First Line <br>
+          Second Line
+        </p>
+      </li>
+
+      <li class="collection-item avatar">
+        <i class="material-icons circle green">insert_chart</i>
+        <span class="title">Title</span>
+        <p>First Line <br>
+          Second Line
+        </p>
+        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+      </li>
+
+      <li class="collection-item avatar">
+        <i class="material-icons circle red">play_arrow</i>
+        <span class="title">Title</span>
+        <p>First Line <br>
+          Second Line
+        </p>
+        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+      </li>
+    </ul>
+
+  </div>
+
 
   <div id="usershow_hoster">
     <% @events.each do |event| %>
@@ -39,7 +97,7 @@
   <div id="usershow_attending">
     <% @attending.each do |event| %>
       <div class="usershow_attending">
-        <h5 class='event_title'><a href="/events/<%= event.id %>"><%= event.event.title %></a></h5>
+        <h5 class='event_title'><a href="/events/<%= event.event.id %>"><%= event.event.title %></a></h5>
         <h6><i><%= event.event.date.strftime('%B %d %Y')%></i> at <%= event.event.time.strftime("%I:%M%p") %></h6>
         <h5 class='event_address'><%= event.event.address %>, <%= event.event.city %>, <%= event.event.state %>, <%= event.event.zipcode %></h5>
         <h6 class='event_description'><%= event.event.description %></h6>
