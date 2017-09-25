@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   has_many :events
+  has_many :images
 
   has_many :attendees, dependent: :destroy
   has_many :events, through: :attendees

@@ -26,6 +26,7 @@ class UsersController < ApplicationController
 
   def profile
     @user = User.find(current_user)
+    @images = Image.where(user_id:current_user.id)
   end
 
   def edit

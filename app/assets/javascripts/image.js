@@ -3,6 +3,8 @@
 
 document.addEventListener('turbolinks:load', function(){
 
+  $('.carousel').carousel();
+    
   var nasaurl = "https://api.nasa.gov/planetary/apod";
   var key = "&api_key=uupOQAQKOCvrpRJ87aNIiAKESnvZYnFdNTdgkHvx";
 

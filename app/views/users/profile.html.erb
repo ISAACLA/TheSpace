@@ -16,13 +16,10 @@
       </ul>
     </div>
   </nav>
-  
+
 
   <h4>Welcome, <%= @user.first_name %></h4>
-  <h1> this is current user profile page</h1>
-  <h3>using it for show user's attending events</h3>
-  <h3>show user hosts events</h3>
-  <h4>User upload photos here on this page </h4>
+  using it for show user's attending events show user hosts events User upload photos here on this page
   <hr>
   <% if flash[:notice] %>
     <% flash[:notice].each do |notice| %>
@@ -30,4 +27,35 @@
     <% end %>
   <% end %>
   <h3>Update my profile <a href="/users/<%= @user.id %>/edit">HERE</a></h3>
+  <h4>Add a new image <a href="/images/new">HERE</a></h4>
+
+  <% if flash[:notice] %>
+    <% flash[:notice].each do |notice| %>
+      <h6 class="notice_message"><%= notice %></h6>
+    <% end %>
+  <% end %>
+
+  <div class="container">
+    <div class="carousel">
+      <% @images.each do |image| %>
+      <a id="carousel-item" class="carousel-item" href="/images/<%= image.id %>/show">
+        <%= image_tag image.image.url(:medium) %>
+        <span class="image_info">
+          <%= image.title %>
+        </span>
+      </a>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="carousel carousel-slider center" data-indicators="true">
+      <% @images.each do |image| %>
+      <div class="carousel-item" href="#one!">
+        <%= image_tag image.image.url(:large) %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
 </body>

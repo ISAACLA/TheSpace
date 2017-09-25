@@ -27,11 +27,14 @@ Rails.application.routes.draw do
   get 'events/:id/edit' => 'events#edit'
   patch 'events/:id' => 'events#update'
   get 'events/state/:state' => 'events#index'
-  
+
 
   post 'attendees' => 'attendees#create'
   delete 'attendees/:id' => 'attendees#destroy'
 
+  get 'images/new' => 'image#new'
+  post 'newimages'  => 'image#create'
+  get 'images/:id/show' => 'image#imageshow'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
