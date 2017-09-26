@@ -16,17 +16,23 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     @my_state_events = Event.where(state:"#{@user.state}").order(created_at: :desc)
     @other_events = Event.where.not(state:"#{@user.state}").order(created_at: :desc)
+
+    @images = Image.order("RANDOM()").limit(10)
+  
   end
 
   def show
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
     @events = Event.where(user_id:@user.id)
     @attending = Attendee.where(user_id:@user.id)
   end
 
   def profile
     @user = User.find(current_user)
-    @images = Image.where(user_id:current_user.id)
+    @images = Image.where(user_id:current_user.id).order(created_at: :desc)
+
+    @events = Event.where(user_id: @user.id)
+    @attending = Attendee.where(user_id:@user.id)
   end
 
   def edit

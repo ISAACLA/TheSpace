@@ -7,9 +7,6 @@ class EventsController < ApplicationController
     @state_events = Event.where(state:params[:state]).order(created_at: :desc)
     @state = params[:state]
 
-    # flash[:notice] = ['Have fun']
-
-
   end
 
   def new
@@ -17,20 +14,18 @@ class EventsController < ApplicationController
   end
 
   def create
+    @user = User.find(current_user.id)
     @event = Event.new(event_params)
     if @event.save
       flash[:notice]=["You have successfully created an Event."]
-      redirect_to '/events'
+      redirect_to "/users/#{@user.id}/profile"
+      # redirect_to '/events'
     else
       flash[:errors]=@event.errors.full_messages
       redirect_to :back
     end
   end
 
-  # def state
-  #   @CA_events= Event.where(state:params[:state])
-  #   redirect_to "/events"
-  # end
 
   def show
     @event = Event.find(params[:id])

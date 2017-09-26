@@ -16,9 +16,21 @@
       </ul>
     </div>
   </nav>
+  <br>
+  <br>
 
+  <div class="row">
+    <div class="col s2">
+    </div>
+    <div class="col s8">
+      <center>
+      <%= image_tag @image.image.url(:large), :id=> "theimage", :class => "materialboxed", :width => 650 %><br>
+    </center>
+    </div>
+    <div class="col s2">
+    </div>
+  </div>
 
-  <%= image_tag @image.image.url(:large) %><br>
   <%= @image.user.first_name %><br>
   <%= @image.title %><br>
   <%= @image.description %>

@@ -20,6 +20,14 @@
 
   <h4>Welcome, <%= @user.first_name %> <%= @user.last_name %></h4>
 
+  <hr>
+    <% @images.each do |image| %>
+      <div class="dash_img">
+        <%= image_tag image.image.url(:large), :class => "dashboard_image" %>
+      </div>
+    <% end %>
+  <hr>
+
   <div class="container">
     <h4 style="text-align:center">Events in my state - <%= current_user.state %></h4>
     <hr>

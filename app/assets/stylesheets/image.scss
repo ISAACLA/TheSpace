@@ -9,7 +9,6 @@ body.imageshow{
   background-attachment: fixed;
   background-size:  cover;
   background-color: rgba(219, 214, 217, 0.96);
-
 }
 
 #information.show{
@@ -49,4 +48,19 @@ body.imageshow{
   z-index: -2;
   background-color: transparent;
   color: transparent;
+}
+
+#theimage{
+  width: 80%;
+  border-radius: 5px;
+  height: 500px
+}
+
+body.image_new{
+  background-color: black;
+  color: rgb(255, 253, 208);
+}
+
+#image_new_nav{
+  border-bottom: 5px solid rgb(255, 253, 208)
 }

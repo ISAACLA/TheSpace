@@ -12,11 +12,53 @@ body.dashboard{
   color: rgb(255, 253, 208);
 }
 
+body.user_edit{
+  background: url(/useredit.jpg);
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+  background-color: rgba(31, 52, 238, 0.48);
+  color: rgb(255, 253, 208);
+}
+
+body.user_profile{
+  // background: url(/3.jpg);
+  // background-position: center center;
+  // background-repeat:  no-repeat;
+  // background-attachment: fixed;
+  // background-size:  cover;
+  background-color: black;
+  color: rgb(255, 253, 208);
+  // color: rgb(114, 235, 199);
+}
+
 .create_event{
   padding:5%
 }
 
-#carousel-item {
-    height: auto;
-    width: auto;
+#slider{
+  height:550px;
+}
+
+#slides{
+  height:500px
+}
+
+#profile_nav{
+  border-bottom: 5px solid rgb(255, 253, 208)
+}
+
+.imagetitle{
+  color: rgb(114, 235, 199);
+}
+
+#profileimage{
+  border: 5px solid rgb(255, 253, 208);
+}
+
+#collapsible-header{
+  background-color: rgba(48, 44, 43, 0.7);
+  font-size: larger;
+  font-family:sans-serif;
 }

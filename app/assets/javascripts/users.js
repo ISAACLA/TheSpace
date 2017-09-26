@@ -4,4 +4,11 @@
 document.addEventListener('turbolinks:load', function(){
   $('.carousel').carousel();
   $('.carousel.carousel-slider').carousel({fullWidth: true});
+  $('.slider').slider();
+  $('.collapsible').collapsible();
 });
+
+// $(document).ready(function(){
+//   $('.carousel').carousel();
+//   $('.carousel.carousel-slider').carousel({fullWidth: true});
+// });

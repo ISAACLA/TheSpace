@@ -1,5 +1,5 @@
 <body class="user_profile">
-  <nav>
+  <nav id="profile_nav">
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">The Space</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -7,7 +7,7 @@
         <li><a href="/images">Explore</a></li>
         <li><a href="/events">Events</a></li>
         <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
-        <li><a class="disabled" href="/users/<%= current_user.id %>/profile">My Profile</a></li>
+        <li><a href="/users/<%= @user.id %>/edit">Update Profile</a></li>
         <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
           <input type="hidden" name="_method" value="delete">
@@ -17,17 +17,9 @@
     </div>
   </nav>
 
+  <br>
 
   <h4>Welcome, <%= @user.first_name %></h4>
-  using it for show user's attending events show user hosts events User upload photos here on this page
-  <hr>
-  <% if flash[:notice] %>
-    <% flash[:notice].each do |notice| %>
-      <h5 class="notice_message"><%= notice %></h5>
-    <% end %>
-  <% end %>
-  <h3>Update my profile <a href="/users/<%= @user.id %>/edit">HERE</a></h3>
-  <h4>Add a new image <a href="/images/new">HERE</a></h4>
 
   <% if flash[:notice] %>
     <% flash[:notice].each do |notice| %>
@@ -35,27 +27,85 @@
     <% end %>
   <% end %>
 
-  <div class="container">
-    <div class="carousel">
-      <% @images.each do |image| %>
-      <a id="carousel-item" class="carousel-item" href="/images/<%= image.id %>/show">
-        <%= image_tag image.image.url(:medium) %>
-        <span class="image_info">
-          <%= image.title %>
-        </span>
-      </a>
-      <% end %>
+<div class="row">
+  <div class="col s2">
+  </div>
+  <div class="col s8">
+    <h4 style="text-align:center">My Images</h4>
+    <span>*Add a new image <a href="/images/new">HERE</a></span>
+    <br>
+    <div id="slider" class="slider" >
+      <ul id="slides" class="slides" >
+        <% @images.each do |image| %>
+        <li id="profile_image" class="profile_image">
+          <a href="/images/<%= image.id %>/show">
+            <%= image_tag image.image.url(:large), :id => "profileimage"%>
+          </a>
+          <div class="caption center-align">
+            <h4 class="imagetitle"> <%= image.title %></h4>
+          </div>
+        </li>
+        <% end %>
+      </ul>
     </div>
   </div>
+  <div class="col s2">
+  </div>
+</div>
+<div class="divider"></div>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col s6">
+      <h6>Attending</h6>
+      <ul class="collapsible" data-collapsible="accordion">
+        <% @attending.each do |attending| %>
+        <li>
+          <div id="collapsible-header" class="collapsible-header"><i class="material-icons">event</i><%= attending.event.title %></div>
+          <div class="collapsible-body"><span>
+            <i class="small material-icons">access_time</i><%= attending.event.date.strftime('%B %d %Y')%> at <%= attending.event.time.strftime("%I:%M%p") %><br>
+            <br>
+            <i class="small material-icons">add_location</i><%= attending.event.address %>, <%= attending.event.city %>, <%= attending.event.state %>, <%= attending.event.zipcode %><br>
+            <br>
+            <i class="small material-icons">message</i><%= attending.event.description %><br>
+            <a href="/events/<%= attending.event.id %>">Show More</a>
+          </span></div>
+        </li>
+        <% end %>
+      </ul>
+    </div>
 
-  <div class="container">
-    <div class="carousel carousel-slider center" data-indicators="true">
-      <% @images.each do |image| %>
-      <div class="carousel-item" href="#one!">
-        <%= image_tag image.image.url(:large) %>
-      </div>
-      <% end %>
+    <div class="col s6">
+      <h6>Hosting</h6>
+      <ul class="collapsible" data-collapsible="accordion">
+        <% @events.each do |event| %>
+        <li>
+          <div id="collapsible-header" class="collapsible-header"><i class="material-icons">event</i><%= event.title %></div>
+          <div class="collapsible-body"><span>
+            <i class="small material-icons">access_time</i><%= event.date.strftime('%B %d %Y')%> at <%= event.time.strftime("%I:%M%p") %><br>
+            <br>
+            <i class="small material-icons">add_location</i><%= event.address %>, <%= event.city %>, <%= event.state %>, <%= event.zipcode %><br>
+            <br>
+            <i class="small material-icons">message</i><%= event.description %><br>
+            <a href="/events/<%= event.id %>">Show More</a>
+          </span></div>
+        </li>
+        <% end %>
+      </ul>
     </div>
   </div>
+  <div class="divider"></div>
+  <div class="row">
+    <div class="col s6">
+      <h6>Friend List</h6>
+    </div>
+
+    <div class="col s6">
+      <h6>My Messages</h6>
+    </div>
+
+  </div>
+</div>
 
 </body>
