@@ -2,13 +2,20 @@
 // All this logic will automatically be available in application.js.
 
 document.addEventListener('turbolinks:load', function(){
-  $('.carousel').carousel();
-  $('.carousel.carousel-slider').carousel({fullWidth: true});
-  $('.slider').slider();
+  // $('.carousel').carousel();
+  // $('.carousel.carousel-slider').carousel({fullWidth: true});
   $('.collapsible').collapsible();
+  $('.slider').slider({
+    height: 700,
+    interval: 2000
+  });
+  $('.grid').masonry({
+    itemSelector: '.grid-item',
+    percentPosition: true,
+    // columnWidth: '.grid-sizer'
+  });
 });
 
-// $(document).ready(function(){
-//   $('.carousel').carousel();
-//   $('.carousel.carousel-slider').carousel({fullWidth: true});
+// $grid.imagesLoaded().progress( function() {
+//   $grid.masonry();
 // });

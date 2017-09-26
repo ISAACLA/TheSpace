@@ -17,11 +17,15 @@
 //= require jquery.turbolinks
 //= require_tree .
 
+//= require masonry/jquery.masonry
+
 document.addEventListener('turbolinks:load', function(){
   $('.collapsible').collapsible();
   // $('ul.tabs').tabs('select_tab', 'tab_id');
   $('ul.tabs').tabs();
   $('.carousel').carousel();
   $('.carousel.carousel-slider').carousel({fullWidth: true});
-  $('.slider').slider();
+  // $('.slider').slider({
+  //   // height: 550;
+  // });
 });

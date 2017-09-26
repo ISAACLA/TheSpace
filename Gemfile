@@ -31,6 +31,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'paperclip', "~> 5.0.0"
 gem 'simple_form'
+gem 'masonry-rails'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

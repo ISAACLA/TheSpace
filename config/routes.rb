@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'users/:id/profile' => 'users#profile'
   get 'users/:id/edit' => 'users#edit'
   patch 'users/:id' => 'users#update'
+  get 'users/:id/images' => 'users#userimages'
 
   get 'events' => 'events#index'
   get 'events/new' => 'events#new'

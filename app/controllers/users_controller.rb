@@ -17,8 +17,8 @@ class UsersController < ApplicationController
     @my_state_events = Event.where(state:"#{@user.state}").order(created_at: :desc)
     @other_events = Event.where.not(state:"#{@user.state}").order(created_at: :desc)
 
-    @images = Image.order("RANDOM()").limit(10)
-  
+    @images = Image.order("RANDOM()").limit(18)
+
   end
 
   def show
@@ -49,6 +49,11 @@ class UsersController < ApplicationController
       flash[:errors]=@user.errors.full_messages
       redirect_to :back
     end
+  end
+
+  def userimages
+    @user = User.find(params[:id])
+    @images = Image.where(user_id:@user.id)
   end
 
 

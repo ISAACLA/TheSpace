@@ -23,11 +23,6 @@ body.user_edit{
 }
 
 body.user_profile{
-  // background: url(/3.jpg);
-  // background-position: center center;
-  // background-repeat:  no-repeat;
-  // background-attachment: fixed;
-  // background-size:  cover;
   background-color: black;
   color: rgb(255, 253, 208);
   // color: rgb(114, 235, 199);
@@ -37,28 +32,30 @@ body.user_profile{
   padding:5%
 }
 
-#slider{
-  height:550px;
-}
-
-#slides{
-  height:500px
-}
-
 #profile_nav{
   border-bottom: 5px solid rgb(255, 253, 208)
 }
 
 .imagetitle{
-  color: rgb(114, 235, 199);
+  color: rgb(255, 253, 208);
 }
 
 #profileimage{
-  border: 5px solid rgb(255, 253, 208);
+  border: 3px solid rgb(255, 253, 208);
 }
 
 #collapsible-header{
   background-color: rgba(48, 44, 43, 0.7);
   font-size: larger;
   font-family:sans-serif;
+}
+
+.dashboard_image{
+  width: auto;
+  height: auto
+}
+
+body.user_show{
+  background-color: black;
+  color: rgb(255, 253, 208);
 }
