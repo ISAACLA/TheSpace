@@ -8,7 +8,7 @@
         <li><a href="/events">Events</a></li>
         <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
         <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
-        <span>Welcome <%= @user.first_name %><span>
+        <span>Welcome <%= @currentuser.first_name %><span>
         <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
           <input type="hidden" name="_method" value="delete">
@@ -33,7 +33,11 @@
         </div>
         <div class="card-action">
           <a href="/users/<%= @user.id %>/images"><%= @user.first_name %>'s images</a>
-          <a href="#">This is a link</a>
+          <form style="display:inline-block" class="" action="index.html" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+            <input type="hidden" name="friendship[user_id]" value="<%= @user.id %>">
+            <button>Add Friend</button>
+          </form>
         </div>
       </div>
     </div>

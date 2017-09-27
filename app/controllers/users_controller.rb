@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @currentuser = User.find(current_user.id)
     @user = User.find(params[:id])
     @events = Event.where(user_id:@user.id)
     @attending = Attendee.where(user_id:@user.id)
@@ -52,6 +53,7 @@ class UsersController < ApplicationController
   end
 
   def userimages
+    @currentuser = User.find(current_user.id)
     @user = User.find(params[:id])
     @images = Image.where(user_id:@user.id)
   end
