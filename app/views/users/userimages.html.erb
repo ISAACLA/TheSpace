@@ -22,17 +22,21 @@
   <a href="/users/<%= @user.id %>/show">Back to <%= @user.first_name %>'s profile</a>
   <br>
   <br>
-  <div class="grid">
-    <% @images.each do |image| %>
-    <div class="row">
-      <div class="grid-item">
-        <div class="col s4">
-          <a href="/images/<%= image.id %>/show">
-            <%= image_tag image.image.url(:large), :class => "dashboard_image" %>
-          </a>
+  <% if @images.length == 0 %>
+  <h3>This user has no image uploaded yet</h3>
+  <% else %>
+    <div class="grid">
+      <% @images.each do |image| %>
+      <div class="row">
+        <div class="grid-item">
+          <div class="col s4">
+            <a href="/images/<%= image.id %>/show">
+              <%= image_tag image.image.url(:large), :class => "dashboard_image" %>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+      <% end %>
     <% end %>
   </div>
 

@@ -32,22 +32,26 @@
   </div>
   <div class="col s10">
     <h4 style="text-align:center">My Images</h4>
-    <span>*Add a new image <a href="/images/new">HERE</a></span>
+    <center><span>*Add a new image <a href="/images/new">HERE</a></span></center>
     <br>
-    <div id="slider" class="slider" >
-      <ul id="slides" class="slides" >
-        <% @images.each do |image| %>
-        <li id="profile_image" class="profile_image">
-          <a href="/images/<%= image.id %>/show">
-            <%= image_tag image.image.url(:large), :id => "profileimage"%>
-          </a>
-          <div class="caption center-align">
-            <h4 class="imagetitle"> <%= image.title %></h4>
-          </div>
-        </li>
-        <% end %>
-      </ul>
-    </div>
+    <% if @images.length == 0 %>
+      <h4>I have not uploaded any image yet.</h4>
+    <% else %>
+      <div id="slider" class="slider" style="width:70%; margin:auto">
+        <ul id="slides" class="slides" >
+          <% @images.each do |image| %>
+          <li id="profile_image" class="profile_image">
+            <a href="/images/<%= image.id %>/show">
+              <%= image_tag image.image.url(:medium), :id => "profileimage"%>
+            </a>
+            <div class="caption center-align">
+              <h4 class="imagetitle"> <%= image.title %></h4>
+            </div>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   </div>
   <div class="col s1">
   </div>
@@ -59,22 +63,13 @@
   <div class="row">
     <div class="col s6">
       <h6>Attending</h6>
-      <ul class="collapsible" data-collapsible="accordion">
         <% if @attending.length == 0 %>
           <span>*I am not going to any event at this moment.</span>
         <% else %>
           <% @attending.each do |attending| %>
-          <li>
-            <div id="collapsible-header" class="collapsible-header"><i class="material-icons">event</i><%= attending.event.title %></div>
-            <div class="collapsible-body"><span>
-              <i class="small material-icons">access_time</i><%= attending.event.date.strftime('%B %d %Y')%> at <%= attending.event.time.strftime("%I:%M%p") %><br>
-              <br>
-              <i class="small material-icons">add_location</i><%= attending.event.address %>, <%= attending.event.city %>, <%= attending.event.state %>, <%= attending.event.zipcode %><br>
-              <br>
-              <i class="small material-icons">message</i><%= attending.event.description %><br>
-              <a href="/events/<%= attending.event.id %>">Show More</a>
-            </span></div>
-          </li>
+          <div class="collection">
+            <a id="collapsible-header" href="/events/<%= attending.event.id %>" class="collection-item"><i class="material-icons">event</i><%= attending.event.title %></a>
+          </div>
           <% end %>
         <% end %>
       </ul>
@@ -82,22 +77,13 @@
 
     <div class="col s6">
       <h6>Hosting</h6>
-      <ul class="collapsible" data-collapsible="accordion">
         <% if @events.length ==0 %>
           <span>*I am not hosting any events yet.</span>
         <% else %>
           <% @events.each do |event| %>
-          <li>
-            <div id="collapsible-header" class="collapsible-header"><i class="material-icons">event</i><%= event.title %></div>
-            <div class="collapsible-body"><span>
-              <i class="small material-icons">access_time</i><%= event.date.strftime('%B %d %Y')%> at <%= event.time.strftime("%I:%M%p") %><br>
-              <br>
-              <i class="small material-icons">add_location</i><%= event.address %>, <%= event.city %>, <%= event.state %>, <%= event.zipcode %><br>
-              <br>
-              <i class="small material-icons">message</i><%= event.description %><br>
-              <a href="/events/<%= event.id %>">Show More</a>
-            </span></div>
-          </li>
+          <div class="collection">
+            <a id="collapsible-header" href="/events/<%= event.id %>" class="collection-item"><i class="material-icons">event</i><%= event.title %></a>
+          </div>
           <% end %>
         <% end %>
       </ul>

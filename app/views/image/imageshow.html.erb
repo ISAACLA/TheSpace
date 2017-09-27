@@ -24,14 +24,36 @@
     </div>
     <div class="col s8">
       <center>
-      <%= image_tag @image.image.url(:large), :id=> "theimage", :class => "materialboxed", :width => 650 %><br>
-    </center>
+        <%= image_tag @image.image.url(:large), :id=> "theimage", :class => "materialboxed" %><br>
+      </center>
     </div>
     <div class="col s2">
     </div>
   </div>
 
+  <!-- <% unless @image.user.id == current_user.id %>
+    <form class="" action="index.html" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="image[image_id]" value="<%= @image.id %>">
+      <button>LIKE</button>
+    </form>
+  <% else %>
+    <form class="" action="index.html" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="delete">
+      <button>Unlike</button>
+    </form>
+  <% end %> -->
+
+  <form class="" action="/likes" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="like[image_id]" value="<%= @image.id %>">
+    <button>LIKE</button>
+  </form>
+
   <%= @image.user.first_name %><br>
   <%= @image.title %><br>
   <%= @image.description %>
+  <br>
+  <%= @image.likes.count %> likes
 </body>

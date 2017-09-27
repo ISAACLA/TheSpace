@@ -1,4 +1,8 @@
-<body class="dashboard">
+
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<!-- or -->
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script><body class="dashboard">
+<script src="/path/to/masonry.pkgd.min.js"></script>
   <header>
     <nav>
       <div class="nav-wrapper">
@@ -26,7 +30,7 @@
       <% @images.each do |image| %>
       <div class="row">
         <div class="grid-item">
-          <div class="col s4">
+          <div class="col s12">
             <a href="/images/<%= image.id %>/show">
               <%= image_tag image.image.url(:large), :class => "dashboard_image" %>
             </a>

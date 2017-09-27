@@ -4,16 +4,20 @@
 document.addEventListener('turbolinks:load', function(){
   // $('.carousel').carousel();
   // $('.carousel.carousel-slider').carousel({fullWidth: true});
-  $('.collapsible').collapsible();
-  $('.slider').slider({
-    height: 700,
-    interval: 2000
-  });
+  $('selector').masonry()
   $('.grid').masonry({
     itemSelector: '.grid-item',
     percentPosition: true,
     // columnWidth: '.grid-sizer'
   });
+
+  $('.collapsible').collapsible();
+  $('.slider').slider({
+    // width: 500,
+    height: 700,
+    interval: 2000
+  });
+  // $(".button-collapse").sideNav();
 });
 
 // $grid.imagesLoaded().progress( function() {

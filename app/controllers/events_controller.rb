@@ -36,11 +36,12 @@ class EventsController < ApplicationController
   end
 
   def update
+    @user = User.find(current_user.id)
     event = Event.find(params[:id])
     event.update(event_params)
     if event.save
       flash[:notice]=["You have successfully updated the event."]
-      redirect_to '/events'
+      redirect_to "/users/#{@user.id}/profile"
     else
       flash[:errors] = event.errors.full_messages
       redirect_to :back
