@@ -1,5 +1,8 @@
 class ImageController < ApplicationController
   def show
+    if current_user
+      @user = User.find(current_user.id)
+    end
   end
 
   def new
@@ -19,6 +22,7 @@ class ImageController < ApplicationController
   end
 
   def imageshow
+    @user = User.find(current_user.id)
     @image = Image.find(params[:id])
   end
 

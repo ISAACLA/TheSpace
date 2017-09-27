@@ -8,6 +8,7 @@
         <li><a href="/events">Events</a></li>
         <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
         <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
+        <span>Welcome <%= @user.first_name %><span>
         <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
           <input type="hidden" name="_method" value="delete">
@@ -31,29 +32,28 @@
     </div>
   </div>
 
-  <!-- <% unless @image.user.id == current_user.id %>
-    <form class="" action="index.html" method="post">
+
+
+  <% unless @image.users.include?(current_user)%>
+    <form class="" action="/likes" method="post">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="hidden" name="image[image_id]" value="<%= @image.id %>">
-      <button>LIKE</button>
+      <input type="hidden" name="like[image_id]" value="<%= @image.id %>">
+      <button><i class="small material-icons">thumb_up</i>Like</button>
     </form>
   <% else %>
-    <form class="" action="index.html" method="post">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <!-- <form class="" action="index.html" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
       <input type="hidden" name="_method" value="delete">
-      <button>Unlike</button>
+      <input type="hidden" name="like[image_id]" value="<%= @image.id %>">
+      <button><i class="small material-icons">thumb_down</i>Dislike</button>
     </form>
-  <% end %> -->
+      <button disabled><i class="small material-icons">thumb_up</i>Liked</button> -->
+  <% end %>
 
-  <form class="" action="/likes" method="post">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <input type="hidden" name="like[image_id]" value="<%= @image.id %>">
-    <button>LIKE</button>
-  </form>
-
+  <br>
   <%= @image.user.first_name %><br>
   <%= @image.title %><br>
   <%= @image.description %>
   <br>
-  <%= @image.likes.count %> likes
+  <%= @image.likes.count %> <i class="small material-icons">thumb_up</i>
 </body>

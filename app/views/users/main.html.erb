@@ -13,6 +13,7 @@
           <li><a href="/events">Events</a></li>
           <li><a class="disabled" href="/users/<%= current_user.id %>/main">Dashboard</a></li>
           <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
+          <span>Welcome <%= @user.first_name %><span>
           <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
             <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
             <input type="hidden" name="_method" value="delete">
