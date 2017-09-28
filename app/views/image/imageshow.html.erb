@@ -3,12 +3,13 @@
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">The Space</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
         <li><a href="/apod">APOD</a></li>
         <li><a href="/images">Explore</a></li>
         <li><a href="/events">Events</a></li>
         <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
         <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
-        <span>Welcome <%= @user.first_name %><span>
+
         <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
           <input type="hidden" name="_method" value="delete">
@@ -34,20 +35,42 @@
 
 
 
-  <% unless @image.users.include?(current_user)%>
-    <form class="" action="/likes" method="post">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="hidden" name="like[image_id]" value="<%= @image.id %>">
-      <button><i class="small material-icons">thumb_up</i>Like</button>
-    </form>
-  <% else %>
-      <button disabled><i class="small material-icons">thumb_up</i>Liked</button>
-  <% end %>
+
 
   <br>
-  <%= @image.user.first_name %><br>
-  <%= @image.title %><br>
-  <%= @image.description %>
-  <br>
-  <%= @image.likes.count %> <i class="small material-icons">thumb_up</i>
+  <div class="container">
+    <ul class="collapsible" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">photo</i>Pioneer</div>
+        <% if @image.user.id == current_user.id %>
+          <div class="collapsible-body"><span>Myself</span></div>
+        <% else %>
+          <div class="collapsible-body"><span><a href="/users/<%= @image.user.id %>/show"><%= @image.user.first_name %> <%= @image.user.last_name %></a></span></div>
+        <% end %>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">title</i>Title</div>
+        <div class="collapsible-body"><span><%= @image.title %></span></div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">description</i>Description</div>
+        <div class="collapsible-body"><span><%= @image.description %></span></div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">thumb_up</i><%= @image.likes.count %> Likes</div>
+        <div class="collapsible-body"><span>
+          <% unless @image.users.include?(current_user)%>
+            <form class="" action="/likes/<%= @image.id %>" method="post">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+              <input type="hidden" name="like[image_id]" value="<%= @image.id %>">
+              <button><i class="small material-icons">thumb_up</i>Like</button>
+            </form>
+          <% else %>
+              <button disabled><i class="small material-icons">thumb_up</i>Liked</button>
+          <% end %>
+        </span></div>
+      </li>
+    </ul>
+  </div>
+
 </body>

@@ -3,17 +3,19 @@
 <!-- or -->
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script><body class="dashboard">
 <script src="/path/to/masonry.pkgd.min.js"></script>
+<body class="dashboard">
   <header>
     <nav>
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">The Space</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
           <li><a href="/apod">APOD</a></li>
           <li><a href="/images">Explore</a></li>
           <li><a href="/events">Events</a></li>
           <li><a class="disabled" href="/users/<%= current_user.id %>/main">Dashboard</a></li>
           <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
-          <span>Welcome <%= @user.first_name %><span>
+        
           <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
             <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
             <input type="hidden" name="_method" value="delete">
@@ -33,7 +35,7 @@
         <div class="grid-item">
           <div class="col s12">
             <a href="/images/<%= image.id %>/show">
-              <%= image_tag image.image.url(:large), :class => "dashboard_image" %>
+              <%= image_tag image.image.url(:medium), :class => "dashboard_image" %>
             </a>
           </div>
         </div>

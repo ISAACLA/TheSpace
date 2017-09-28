@@ -16,6 +16,10 @@
 //= require turbolinks
 //= require jquery.turbolinks
 //= require_tree .
+//= require_materialize.min
+//= require_materialize
+//= require_masonry.pkgd.min
+
 
 //= require masonry/jquery.masonry
 
@@ -31,13 +35,44 @@
 
 //= require isotope/jquery.isotope
 
+
 document.addEventListener('turbolinks:load', function(){
   $('.collapsible').collapsible();
-  // $('ul.tabs').tabs('select_tab', 'tab_id');
   $('ul.tabs').tabs();
   $('.carousel').carousel();
   $('.carousel.carousel-slider').carousel({fullWidth: true});
-  // $('.slider').slider({
-  //   // height: 550;
-  // });
+
+  // $('selector').masonry()
+  $('.grid').masonry({
+    itemSelector: '.grid-item',
+    percentPosition: true,
+  });
+
+  $('.slider').slider({
+    // width: 500,
+    height: 700,
+    interval: 2000
+  });
+
 });
+//
+// $(document).on('ready page:load', function () {
+//     $('.collapsible').collapsible();
+//     $('ul.tabs').tabs();
+//     $('.carousel').carousel();
+//     $('.carousel.carousel-slider').carousel({fullWidth: true});
+//
+//     //  user.js
+//     $('selector').masonry()
+//     $('.grid').masonry({
+//       itemSelector: '.grid-item',
+//       percentPosition: true,
+//     });
+//
+//     // $('.collapsible').collapsible();
+//     $('.slider').slider({
+//       // width: 500,
+//       height: 700,
+//       interval: 2000
+//     });
+// });

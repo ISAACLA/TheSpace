@@ -6,8 +6,7 @@
 // });
 
 // $(document).ready(function(){
-document.addEventListener('turbolinks:load', function(){
-  $('.collapsible').collapsible();
-  // $('ul.tabs').tabs('select_tab', 'tab_id');
-  $('ul.tabs').tabs();
-});
+// document.addEventListener('turbolinks:load', function(){
+//   $('.collapsible').collapsible();
+//   $('ul.tabs').tabs();
+// });

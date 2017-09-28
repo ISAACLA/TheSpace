@@ -13,6 +13,8 @@
 
  *= require_tree .
  *= require_self
+ *= require_materialize.min
+ *= require_masonry
 
  *= require 'masonry/basic'
  *= require 'masonry/centered'
