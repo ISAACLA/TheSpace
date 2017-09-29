@@ -36,40 +36,56 @@
       </div>
     </div>
     <br>
-    <div class="container">
-      <ul class="collapsible" data-collapsible="accordion">
-        <li>
-          <div id="collapsible-header" class="collapsible-header"><i class="material-icons">photo</i>Pioneer</div>
-          <% if @image.user.id == current_user.id %>
-          <div class="collapsible-body"><span>Myself</span></div>
-          <% else %>
-          <div class="collapsible-body"><span><a href="/users/<%= @image.user.id %>/show"><%= @image.user.first_name %> <%= @image.user.last_name %></a></span></div>
-          <% end %>
-        </li>
-        <li>
-          <div id="collapsible-header" class="collapsible-header"><i class="material-icons">title</i>Title</div>
-          <div class="collapsible-body"><span><%= @image.title %></span></div>
-        </li>
-        <li>
-          <div id="collapsible-header" class="collapsible-header"><i class="material-icons">description</i>Description</div>
-          <div class="collapsible-body"><span><%= @image.description %></span></div>
-        </li>
-        <li>
-          <div id="collapsible-header" class="collapsible-header"><i class="material-icons">thumb_up</i><%= @image.likes.count %> Likes</div>
-          <div class="collapsible-body"><span>
-            <% unless @image.users.include?(current_user)%>
-            <form class="" action="/likes/<%= @image.id %>" method="post">
-              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-              <input type="hidden" name="like[image_id]" value="<%= @image.id %>">
-              <button class="waves-effect waves-light btn"><i class="small material-icons">thumb_up</i>Like</button>
-            </form>
+    <div class="row">
+      <div class="col s6">
+        <ul class="collapsible" data-collapsible="accordion">
+          <li>
+            <div id="collapsible-header" class="collapsible-header"><i class="material-icons">photo</i>Pioneer</div>
+            <% if @image.user.id == current_user.id %>
+            <div class="collapsible-body"><span>Myself</span></div>
             <% else %>
-            <button disabled class="waves-effect waves-light btn"><i class="small material-icons">thumb_up</i>Liked</button>
+            <div class="collapsible-body"><span><a href="/users/<%= @image.user.id %>/show"><%= @image.user.first_name %> <%= @image.user.last_name %></a></span></div>
             <% end %>
-          </span></div>
-        </li>
-      </ul>
+          </li>
+          <li>
+            <div id="collapsible-header" class="collapsible-header"><i class="material-icons">title</i>Title</div>
+            <div class="collapsible-body"><span><%= @image.title %></span></div>
+          </li>
+          <li>
+            <div id="collapsible-header" class="collapsible-header"><i class="material-icons">description</i>Description</div>
+            <div class="collapsible-body"><span><%= @image.description %></span></div>
+          </li>
+          <li>
+            <div id="collapsible-header" class="collapsible-header"><i class="material-icons">thumb_up</i><%= @image.likes.count %> Likes</div>
+            <div class="collapsible-body"><span>
+              <% unless @image.users.include?(current_user)%>
+              <form class="" action="/likes/<%= @image.id %>" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <input type="hidden" name="like[image_id]" value="<%= @image.id %>">
+                <button class="waves-effect waves-light btn"><i class="small material-icons">thumb_up</i>Like</button>
+              </form>
+              <% else %>
+              <button disabled class="waves-effect waves-light btn"><i class="small material-icons">thumb_up</i>Liked</button>
+              <% end %>
+            </span></div>
+          </li>
+        </ul>
+      </div>
+      <div class="col s6">
+        <h6>Comments</h6>
+        <% @comments.each do |comment| %>
+         <%= comment.user.first_name %> says: <%= comment.comment %><br>
+        <% end %>
+        <form class="" action="/images/<%= @image.id %>/comment" method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+          <input type="hidden" name="comment[commentable_id]" value="<%= @image.id %>">
+          <input type="hidden" name="comment[commentable_type]" value="Image">
+          <textarea name="comment[comment]" rows="8" cols="80"></textarea>
+          <button>Add Comment</button>
+        </form>
+      </div>
     </div>
+
   </main>
   <br><br>
   <br><br>

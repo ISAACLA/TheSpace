@@ -39,7 +39,10 @@ Rails.application.routes.draw do
 
   post 'likes/:id' => 'like#create'
   post 'friendship'=> 'friendship#create'
-  delete 'friendship/:id' => 'friendship#destroy' 
+  delete 'friendship/:id' => 'friendship#destroy'
+
+  post 'images/:id/comment' => 'comment#imagecomment'
+  post 'events/:id/comment' => 'comment#eventcomment'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

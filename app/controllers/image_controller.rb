@@ -24,6 +24,7 @@ class ImageController < ApplicationController
   def imageshow
     @user = User.find(current_user.id)
     @image = Image.find(params[:id])
+    @comments = Image.find(@image.id).comments
   end
 
   private

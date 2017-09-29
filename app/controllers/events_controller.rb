@@ -30,6 +30,7 @@ class EventsController < ApplicationController
   def show
     @user = User.find(current_user.id)
     @event = Event.find(params[:id])
+    @comments = Event.find(@event.id).comments
   end
 
   def edit
