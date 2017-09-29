@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   get 'images/:id/show' => 'image#imageshow'
 
   post 'likes/:id' => 'like#create'
+  post 'friendship'=> 'friendship#create'
+  delete 'friendship/:id' => 'friendship#destroy' 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

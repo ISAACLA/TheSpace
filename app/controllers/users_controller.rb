@@ -34,6 +34,24 @@ class UsersController < ApplicationController
 
     @events = Event.where(user_id: @user.id)
     @attending = Attendee.where(user_id:@user.id)
+
+
+      # @friends = Friendship.where(user_id:current_user.id)
+      # @myfriends =
+
+    # @myfriends_one = @friends.each do |friend| User.find(friend.friend_id) }
+    # @myfriends_two = User.find (@friends.each {|friend| return friend.friend_id})
+    # @list = @friends.each {|friend| User.find(friend.friend_id)}
+    #
+    # def friends
+    #
+    #   @mylist = []
+    #   @friends = Friendship.where(user_id:current_user.id)
+    #   @list = @friends.each {|friend| User.find(friend.friend_id)}
+    #   list = User.find(friend_id)
+    #   @mylist.push(list)
+    # end
+
   end
 
   def edit

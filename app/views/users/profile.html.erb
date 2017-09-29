@@ -21,8 +21,6 @@
 
   <br>
 
-  <h4>Welcome, <%= @user.first_name %></h4>
-
   <% if flash[:notice] %>
     <% flash[:notice].each do |notice| %>
       <h6 class="notice_message"><%= notice %></h6>
@@ -58,9 +56,16 @@
   <div class="col s1">
   </div>
 </div>
-<div class="divider"></div>
+
+<br>
+
+<div class="container">
+  <div class="divider"></div>
+</div>
+
 <br>
 <br>
+
 <div class="container">
   <div class="row">
     <div class="col s6">
@@ -95,6 +100,15 @@
   <div class="row">
     <div class="col s6">
       <h6>Friend List</h6>
+      <ul>
+        <%  for friendship in @user.friendships %>
+        <% %>
+          <li><a href="/users/<%= friendship.friend.id %>/show"> <%= friendship.friend.first_name %> <%= friendship.friend.last_name%></a> |
+              <a href="/friendship/<%= friendship.friend.id %>" data-method='delete' data-confirm='Are you sure to unfriend?'>Unfriend</a>
+          </li>
+
+        <% end %>
+      </ul>
     </div>
 
     <div class="col s6">

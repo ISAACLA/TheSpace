@@ -3,12 +3,15 @@ class User < ActiveRecord::Base
   has_many :events
   has_many :images
 
-  
+
   has_many :likes, dependent: :destroy
   has_many :image_liked, through: :likes, source: :image
 
   has_many :attendees, dependent: :destroy
   has_many :events, through: :attendees
+
+  has_many :friendships
+  has_many :friends, :through => :friendships
 
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i
   validates :first_name, :last_name, :zipcode, :state, presence:true

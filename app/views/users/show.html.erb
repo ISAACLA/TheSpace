@@ -3,13 +3,13 @@
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">The Space</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
+        <li>Hi, <%= @currentuser.first_name %>! &nbsp &nbsp</li>
         <li><a href="/apod">APOD</a></li>
         <li><a href="/images">Explore</a></li>
         <li><a href="/events">Events</a></li>
         <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
         <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
-      
+
         <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
           <input type="hidden" name="_method" value="delete">
@@ -34,11 +34,15 @@
         </div>
         <div class="card-action">
           <a class="waves-effect waves-light btn" href="/users/<%= @user.id %>/images"><%= @user.first_name %>'s images</a>
-          <form style="display:inline-block" class="" action="index.html" method="post">
-            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
-            <input type="hidden" name="friendship[user_id]" value="<%= @user.id %>">
-            <button class="waves-effect waves-light btn"><i class="small material-icons">add</i>Add Friend</button>
-          </form>
+          <% unless @currentuser.friends.include?(@user)%>
+            <form style="display:inline-block" class="" action="/friendship" method="post">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+              <input type="hidden" name="friendship[friend_id]" value="<%= @user.id %>">
+              <button class="waves-effect waves-light btn"><i class="small material-icons">add</i>Add Friend</button>
+            </form>
+          <% else %>
+              <button disabled class="waves-effect waves-light btn">Freinded</button>
+          <% end %>
         </div>
       </div>
     </div>
