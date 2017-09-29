@@ -15,7 +15,7 @@
           <li><a href="/events">Events</a></li>
           <li><a class="disabled" href="/users/<%= current_user.id %>/main">Dashboard</a></li>
           <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
-        
+
           <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
             <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
             <input type="hidden" name="_method" value="delete">
@@ -27,9 +27,20 @@
   </header>
 
   <main>
-    <h4>Welcome, <%= @user.first_name %> <%= @user.last_name %></h4>
     <br>
-    <div class="grid">
+    <h5>&nbsp;&nbsp;Cosmos, the beauty is beyond any word.</h5>
+    <div class="row">
+      <% @images.each do |image| %>
+      <div id="image_box" class="col s4">
+        <a href="/images/<%= image.id %>/show">
+          <%= image_tag image.image.url(:large), :class => "dashboard_image" %>
+          <!-- <%= image.title %> -->
+      </a>
+      </div>
+      <% end %>
+    </div>
+
+    <!-- <div class="grid">
       <% @images.each do |image| %>
       <div class="row">
         <div class="grid-item">
@@ -41,7 +52,8 @@
         </div>
       </div>
       <% end %>
-    </div>
+    </div> -->
+
   </main>
   <br>
   <br>

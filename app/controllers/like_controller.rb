@@ -4,7 +4,7 @@ class LikeController < ApplicationController
     @user = User.find(current_user.id)
     # @image = Image.find(params[:id])
     Like.create like_parmas
-    redirect_to "/images/#{params[:id]}/show"
+    redirect_to "/users/#{@user.id}/main"
   end
 
   private

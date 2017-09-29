@@ -1,6 +1,6 @@
 <body class='imageshow'>
-
-  <% if current_user %>
+  <header>
+    <% if current_user %>
     <nav>
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">The Space</a>
@@ -20,7 +20,7 @@
         </ul>
       </div>
     </nav>
-  <% else %>
+    <% else %>
     <ul id="dropdown1" class="dropdown-content">
       <li><a href="/login">Login</a></li>
       <li class="divider"></li>
@@ -36,18 +36,30 @@
         </ul>
       </div>
     </nav>
-  <% end %>
-
+    <% end %>
+  </header>
   <br>
-  <!-- <iframe id="show_video" type="text/html" width="640" height="385" frameborder="0"></iframe> -->
+  <main>
+    <div id="information" class='hide'>
+      <h4 id="show_title"></h4>
+      <h5 id="show_explanation"></h5>
+    </div>
 
-  <div id="information" class='hide'>
-    <h4 id="show_title"></h4>
-    <h5 id="show_explanation"></h5>
-  </div>
-
-  <div id="button">
-    <button id="showinfo" style="background-color:#26a69a" class="waves-effect btn">Show Info</button>
-    <button id='nextone' style="background-color:#26a69a" class="waves-effect  btn">Next-Image</button>
-  </div>
+    <div id="button">
+      <button id="showinfo" style="background-color:#26a69a" class="waves-effect btn">Show Info</button>
+      <button id='nextone' style="background-color:#26a69a" class="waves-effect  btn">Next-Image</button>
+    </div>
+  </main>
+  <footer id="footer">
+    <div class="row">
+      <div class="col s8">
+        <h5 class="white-text">The Space</h5>
+        <h6 class="grey-text text-lighten-4">© 2017 Isaac Yanbin La Copyright Text</h6>
+      </div>
+      <div class="col s4">
+        <h5 class="white-text">Links</h5>
+        <a href="#">NASA</a> | <a href="#">NASA Image</a> | <a href="#">Another</a>
+      </div>
+    </div>
+  </footer>
 </body>

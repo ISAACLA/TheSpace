@@ -1,121 +1,135 @@
 <body class="user_profile">
-  <nav id="profile_nav">
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">The Space</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
-        <li><a href="/apod">APOD</a></li>
-        <li><a href="/images">Explore</a></li>
-        <li><a href="/events">Events</a></li>
-        <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
-        <li><a href="/users/<%= @user.id %>/edit">Update Profile</a></li>
+  <header>
+    <nav id="profile_nav">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">The Space</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
+          <li><a href="/apod">APOD</a></li>
+          <li><a href="/images">Explore</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
+          <li><a href="/users/<%= @user.id %>/edit">Update Profile</a></li>
 
-        <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
-          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <input type="hidden" name="_method" value="delete">
-          <input id='logoutbtn' type="submit" name="" value="Log Out">
-        </form>
-      </ul>
-    </div>
-  </nav>
+          <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="_method" value="delete">
+            <input id='logoutbtn' type="submit" name="" value="Log Out">
+          </form>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
   <br>
 
-  <% if flash[:notice] %>
+  <main>
+    <% if flash[:notice] %>
     <% flash[:notice].each do |notice| %>
-      <h6 class="notice_message"><%= notice %></h6>
+    <h6 class="notice_message"><%= notice %></h6>
     <% end %>
-  <% end %>
+    <% end %>
 
-<div class="row">
-  <div class="col s1">
-  </div>
-  <div class="col s10">
-    <h4 style="text-align:center">My Images</h4>
-    <center><span>*Add a new image <a href="/images/new">HERE</a></span></center>
-    <br>
-    <% if @images.length == 0 %>
-      <h4>I have not uploaded any image yet.</h4>
-    <% else %>
-      <div id="slider" class="slider" style="width:70%; margin:auto">
-        <ul id="slides" class="slides" >
-          <% @images.each do |image| %>
-          <li id="profile_image" class="profile_image">
-            <a href="/images/<%= image.id %>/show">
-              <%= image_tag image.image.url(:medium), :id => "profileimage"%>
-            </a>
-            <div class="caption center-align">
-              <h4 class="imagetitle"> <%= image.title %></h4>
-            </div>
-          </li>
-          <% end %>
-        </ul>
+    <div class="row">
+      <div class="col s1">
       </div>
-    <% end %>
-  </div>
-  <div class="col s1">
-  </div>
-</div>
-
-<br>
-
-<div class="container">
-  <div class="divider"></div>
-</div>
-
-<br>
-<br>
-
-<div class="container">
-  <div class="row">
-    <div class="col s6">
-      <h6>Attending</h6>
-        <% if @attending.length == 0 %>
-          <span>*I am not going to any event at this moment.</span>
+      <div class="col s10">
+        <h4 style="text-align:center">My Images</h4>
+        <center><span>*Add a new image <a href="/images/new">HERE</a></span></center>
+        <br>
+        <% if @images.length == 0 %>
+        <h4>I have not uploaded any image yet.</h4>
         <% else %>
-          <% @attending.each do |attending| %>
-          <div class="collection">
-            <a id="collapsible-header" href="/events/<%= attending.event.id %>" class="collection-item"><i class="material-icons">event</i><%= attending.event.title %></a>
-          </div>
-          <% end %>
+        <div id="slider" class="slider" style="width:70%; margin:auto">
+          <ul id="slides" class="slides" >
+            <% @images.each do |image| %>
+            <li id="profile_image" class="profile_image">
+              <a href="/images/<%= image.id %>/show">
+                <%= image_tag image.image.url(:medium), :id => "profileimage"%>
+              </a>
+              <div class="caption center-align">
+                <h4 class="imagetitle"> <%= image.title %></h4>
+              </div>
+            </li>
+            <% end %>
+          </ul>
+        </div>
         <% end %>
-      </ul>
+      </div>
+      <div class="col s1">
+      </div>
     </div>
 
-    <div class="col s6">
-      <h6>Hosting</h6>
-        <% if @events.length ==0 %>
-          <span>*I am not hosting any events yet.</span>
-        <% else %>
-          <% @events.each do |event| %>
-          <div class="collection">
-            <a id="collapsible-header" href="/events/<%= event.id %>" class="collection-item"><i class="material-icons">event</i><%= event.title %></a>
-          </div>
-          <% end %>
-        <% end %>
-      </ul>
+    <br>
+
+    <div class="container">
+      <div class="divider"></div>
     </div>
-  </div>
-  <div class="divider"></div>
-  <div class="row">
-    <div class="col s6">
-      <h6>Friend List</h6>
-      <ul>
-        <%  for friendship in @user.friendships %>
-        <% %>
-          <li><a href="/users/<%= friendship.friend.id %>/show"> <%= friendship.friend.first_name %> <%= friendship.friend.last_name%></a> |
+
+    <br>
+    <br>
+
+    <div class="container">
+      <div class="row">
+        <div class="col s6">
+          <h6>Attending</h6>
+            <% if @attending.length == 0 %>
+            <span>*I am not going to any event at this moment.</span>
+            <% else %>
+              <% @attending.each do |attending| %>
+                <div class="collection">
+                  <a id="collapsible-header" href="/events/<%= attending.event.id %>" class="collection-item"><i class="material-icons">event</i><%= attending.event.title %></a>
+                </div>
+              <% end %>
+            <% end %>
+        </div>
+
+        <div class="col s6">
+          <h6>Hosting</h6>
+          <% if @events.length ==0 %>
+            <span>*I am not hosting any events yet.</span>
+          <% else %>
+            <% @events.each do |event| %>
+              <div class="collection">
+                <a id="collapsible-header" href="/events/<%= event.id %>" class="collection-item"><i class="material-icons">event</i><%= event.title %></a>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <div class="col s6">
+          <h6>Friend List</h6>
+          <ul>
+            <%  for friendship in @user.friendships %>
+            <% %>
+            <li><a href="/users/<%= friendship.friend.id %>/show"> <%= friendship.friend.first_name %> <%= friendship.friend.last_name%></a> |
               <a href="/friendship/<%= friendship.friend.id %>" data-method='delete' data-confirm='Are you sure to unfriend?'>Unfriend</a>
-          </li>
+            </li>
+            <% end %>
+          </ul>
+        </div>
 
-        <% end %>
-      </ul>
+        <div class="col s6">
+          <h6>My Messages</h6>
+        </div>
+
+      </div>
     </div>
+</main>
 
-    <div class="col s6">
-      <h6>My Messages</h6>
+<footer id="footer">
+  <div class="row">
+    <div class="col s8">
+      <h5 class="white-text">The Space</h5>
+      <h6 class="grey-text text-lighten-4">© 2017 Isaac Yanbin La Copyright Text</h6>
     </div>
-
+    <div class="col s4">
+      <h5 class="white-text">Links</h5>
+      <a href="#">NASA</a> | <a href="#">NASA Image</a> | <a href="#">Another</a>
+    </div>
   </div>
-</div>
+</footer>
 
 </body>

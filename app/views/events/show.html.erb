@@ -1,106 +1,132 @@
 
 <body class="event_show">
-  <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">The Space</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
-        <li><a href="/apod">APOD</a></li>
-        <li><a href="/images">Explore</a></li>
-        <li><a href="/events">Events</a></li>
-        <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
-        <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
+  <header>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">The Space</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
+          <li><a href="/apod">APOD</a></li>
+          <li><a href="/images">Explore</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
+          <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
 
-        <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
-          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <input type="hidden" name="_method" value="delete">
-          <input id='logoutbtn' type="submit" name="" value="Log Out">
-        </form>
-      </ul>
-    </div>
-  </nav>
-
-  <br>
-  <br>
-  <br>
-
-  <div class="container">
-    <ul class="collapsible" data-collapsible="accordion">
-      <li>
-        <div id="show-header"><i class="medium material-icons">event</i> &nbsp; <%= @event.title %></div>
-        <!-- <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div> -->
-      </li>
-      <li>
-        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">date_range</i>&nbsp; &nbsp; DATE </div>
-        <div class="collapsible-body"><span><%= @event.date.strftime('%B %d %Y')%></span></div>
-      </li>
-      <li>
-        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">access_time</i>&nbsp; &nbsp; TIME</div>
-        <div class="collapsible-body"><span><%= @event.time.strftime("%I:%M %p") %></span></div>
-      </li>
-      <li>
-        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">place</i>&nbsp; &nbsp; Location</div>
-        <div class="collapsible-body"><span><%= @event.address %>, <%= @event.city %>, <%= @event.state %> <%= @event.zipcode %></span></div>
-      </li>
-      <li>
-        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">person_outline</i>&nbsp; &nbsp; Hoster</div>
-        <div class="collapsible-body"><span>
-          <a href="/users/<%= @event.user.id %>/show"> <%= @event.user.first_name %> <%= @event.user.last_name %> </a>
-        </span></div>
-      </li>
-      <li>
-        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">message</i>&nbsp; &nbsp; Description</div>
-        <div class="collapsible-body"><span><%= @event.description %></span></div>
-      </li>
-      <li>
-        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">details</i>&nbsp; &nbsp; Action</div>
-        <div class="collapsible-body"><span>
-          <% if @event.user == current_user %>
-          <div class="row">
-            <div class="col s6">
-              <a class="white_link" href="/events/<%= @event.id %>/edit">Edit</a>
-            </div>
-            <div class="col s6">
-              <a class="white_link" href="/events/<%= @event.id%>" data-method='delete' data-confirm="Are you sure to delete?">Delete</a>
-            </div>
-          </div>
-          <% end %>
-          <% unless @event.user_id == current_user.id %>
-          <% unless @event.users.include?(current_user) %>
-          <form action="/attendees" method="post">
-            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
-            <input type="hidden" name="attendee[event_id]" value="<%= @event.id %>">
-            <input class='waves-effect btn' type="submit" name="" value="Join">
+          <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="_method" value="delete">
+            <input id='logoutbtn' type="submit" name="" value="Log Out">
           </form>
-          <% else %>
-          <div class="row">
-            <div class="col s6">
-              <span class="joining">Joining</span>
-            </div>
-            <div class="col s6">
-              <a class="white_link" data-method='delete' data-confirm="Are you sure?" href="/attendees/<%= @event.id %>">Cancel</a>
-            </div>
-          </div>
-          <% end %>
-          <% end %>
-        </span></div>
-      </li>
-      <li>
-        <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">people</i>&nbsp; &nbsp; Attendees</div>
-        <div class="collapsible-body"><span>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-          <ul id="collection-item" class="collection">
-            <% @event.attendees.each do |attendee| %>
+  <br>
+  <br>
+  <br>
+
+  <main>
+    <div class="container">
+      <ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div id="show-header"><i class="medium material-icons">event</i> &nbsp; <%= @event.title %></div>
+          <!-- <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div> -->
+        </li>
+        <li>
+          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">date_range</i>&nbsp; &nbsp; DATE </div>
+          <div class="collapsible-body"><span><%= @event.date.strftime('%B %d %Y')%></span></div>
+        </li>
+        <li>
+          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">access_time</i>&nbsp; &nbsp; TIME</div>
+          <div class="collapsible-body"><span><%= @event.time.strftime("%I:%M %p") %></span></div>
+        </li>
+        <li>
+          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">place</i>&nbsp; &nbsp; Location</div>
+          <div class="collapsible-body"><span><%= @event.address %>, <%= @event.city %>, <%= @event.state %> <%= @event.zipcode %></span></div>
+        </li>
+        <li>
+          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">person_outline</i>&nbsp; &nbsp; Hoster</div>
+          <% unless @event.user == @user %>
+          <div class="collapsible-body"><span>
+            <a href="/users/<%= @event.user.id %>/show"> <%= @event.user.first_name %> <%= @event.user.last_name %> </a>
+          </span></div>
+          <% else %>
+          <div class="collapsible-body"><span>
+            My Event
+          </span></div>
+          <% end %>
+        </li>
+        <li>
+          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">message</i>&nbsp; &nbsp; Description</div>
+          <div class="collapsible-body"><span><%= @event.description %></span></div>
+        </li>
+        <li>
+          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">details</i>&nbsp; &nbsp; Action</div>
+          <div class="collapsible-body"><span>
+            <% if @event.user == current_user %>
+            <div class="row">
+              <div class="col s6">
+                <a class="white_link" href="/events/<%= @event.id %>/edit">Edit</a>
+              </div>
+              <div class="col s6">
+                <a class="white_link" href="/events/<%= @event.id%>" data-method='delete' data-confirm="Are you sure to delete?">Delete</a>
+              </div>
+            </div>
+            <% end %>
+            <% unless @event.user_id == current_user.id %>
+            <% unless @event.users.include?(current_user) %>
+            <form action="/attendees" method="post">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+              <input type="hidden" name="attendee[event_id]" value="<%= @event.id %>">
+              <input class='waves-effect btn' type="submit" name="" value="Join">
+            </form>
+            <% else %>
+            <div class="row">
+              <div class="col s6">
+                <span class="joining">Joining</span>
+              </div>
+              <div class="col s6">
+                <a class="white_link" data-method='delete' data-confirm="Are you sure?" href="/attendees/<%= @event.id %>">Cancel</a>
+              </div>
+            </div>
+            <% end %>
+            <% end %>
+          </span></div>
+        </li>
+        <li>
+          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">people</i>&nbsp; &nbsp; Attendees</div>
+          <div class="collapsible-body"><span>
+
+            <ul id="collection-item" class="collection">
+              <% @event.attendees.each do |attendee| %>
+              <% unless attendee.user == current_user %>
               <li id="collection-item"  class="collection-item">
                 <a href="/users/<%= attendee.user.id %>/show"><%= attendee.user.first_name %> <%= attendee.user.last_name %></a>
               </li>
-            <% end %>
-          </ul>
-
-        </span></div>
-      </li>
-    </ul>
-
+              <% else %>
+              <li id="collection-item"  class="collection-item">
+                Me, Yes me.
+              </li>
+              <% end %>
+              <% end %>
+            </ul>
+          </span></div>
+        </li>
+      </ul>
     </div>
+  </main>
 
+  <footer id="footer">
+    <div class="row">
+      <div class="col s8">
+        <h5 class="white-text">The Space</h5>
+        <h6 class="grey-text text-lighten-4">© 2017 Isaac Yanbin La Copyright Text</h6>
+      </div>
+      <div class="col s4">
+        <h5 class="white-text">Links</h5>
+        <a href="#">NASA</a> | <a href="#">NASA Image</a> | <a href="#">Another</a>
+      </div>
+    </div>
+  </footer>
 </body>

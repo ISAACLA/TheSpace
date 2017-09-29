@@ -1,147 +1,165 @@
 <body class="user_edit">
-  <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">The Space</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
-        <li><a href="/apod">APOD</a></li>
-        <li><a href="/images">Explore</a></li>
-        <li><a href="/events">Events</a></li>
-        <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
-        <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
+  <header>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">The Space</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
+          <li><a href="/apod">APOD</a></li>
+          <li><a href="/images">Explore</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
+          <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
 
-        <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
-          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <input type="hidden" name="_method" value="delete">
-          <input id='logoutbtn' type="submit" name="" value="Log Out">
-        </form>
-      </ul>
-    </div>
-  </nav>
+          <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="_method" value="delete">
+            <input id='logoutbtn' type="submit" name="" value="Log Out">
+          </form>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
   <br>
-  <div class="row">
-    <div class="col s2">
-    </div>
 
-    <div class="col s8">
-      <div class="registerform">
-        <h5>&nbsp Update My Profile</h5>
-        <form class="" action="/users/<%= @user.id %>" method="post">
-          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
-          <input type="hidden" name="_method" value="patch">
-          <div class="row">
-            <div class="input-field col s12">
-              <input id='first_name' type="text" name="user[first_name]" disabled placeholder="<%= @user.first_name %>">
-              <label for="first_name">First Name</label>
+  <main>
+    <div class="row">
+      <div class="col s2">
+      </div>
+
+      <div class="col s8">
+        <div class="registerform">
+          <h5>&nbsp Update My Profile</h5>
+          <form class="" action="/users/<%= @user.id %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+            <input type="hidden" name="_method" value="patch">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id='first_name' type="text" name="user[first_name]" disabled placeholder="<%= @user.first_name %>">
+                <label for="first_name">First Name</label>
+              </div>
             </div>
-          </div>
 
-          <div class="row">
-            <div class="input-field col s12">
-              <input id='last_name' type="text" name="user[last_name]" disabled placeholder="<%= @user.last_name %>">
-              <label for="last_name">Last Name</label>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id='last_name' type="text" name="user[last_name]" disabled placeholder="<%= @user.last_name %>">
+                <label for="last_name">Last Name</label>
+              </div>
             </div>
-          </div>
 
-          <div class="row">
-            <div class="input-field col s12">
-              <input type="email" name="user[email]" placeholder="<%= @user.email %>">
-              <label for="email">Email</label>
+            <div class="row">
+              <div class="input-field col s12">
+                <input type="email" name="user[email]" placeholder="<%= @user.email %>">
+                <label for="email">Email</label>
+              </div>
             </div>
-          </div>
 
-          <div class="row">
-            <div class="input-field col s12">
-              <input type="number" name="user[zipcode]" placeholder="<%= @user.zipcode %>">
-              <label for="zipcode">Zipcode</label>
+            <div class="row">
+              <div class="input-field col s12">
+                <input type="number" name="user[zipcode]" placeholder="<%= @user.zipcode %>">
+                <label for="zipcode">Zipcode</label>
+              </div>
             </div>
-          </div>
 
-          <div class="col s12" >
-            <select name="user[state]">
-              <option value="" disabled selected>State</option>
-              <option value="AL">AL</option>
-              <option value="AK">AK</option>
-              <option value="AR">AR</option>
-              <option value="AZ">AZ</option>
-              <option value="CA">CA</option>
-              <option value="CO">CO</option>
-              <option value="CT">CT</option>
-              <option value="DC">DC</option>
-              <option value="DE">DE</option>
-              <option value="FL">FL</option>
-              <option value="GA">GA</option>
-              <option value="HI">HI</option>
-              <option value="IA">IA</option>
-              <option value="ID">ID</option>
-              <option value="IL">IL</option>
-              <option value="IN">IN</option>
-              <option value="KS">KS</option>
-              <option value="KY">KY</option>
-              <option value="LA">LA</option>
-              <option value="MA">MA</option>
-              <option value="MD">MD</option>
-              <option value="ME">ME</option>
-              <option value="MI">MI</option>
-              <option value="MN">MN</option>
-              <option value="MO">MO</option>
-              <option value="MS">MS</option>
-              <option value="MT">MT</option>
-              <option value="NC">NC</option>
-              <option value="NE">NE</option>
-              <option value="NH">NH</option>
-              <option value="NJ">NJ</option>
-              <option value="NM">NM</option>
-              <option value="NV">NV</option>
-              <option value="NY">NY</option>
-              <option value="ND">ND</option>
-              <option value="OH">OH</option>
-              <option value="OK">OK</option>
-              <option value="OR">OR</option>
-              <option value="PA">PA</option>
-              <option value="RI">RI</option>
-              <option value="SC">SC</option>
-              <option value="SD">SD</option>
-              <option value="TN">TN</option>
-              <option value="TX">TX</option>
-              <option value="UT">UT</option>
-              <option value="VT">VT</option>
-              <option value="VA">VA</option>
-              <option value="WA">WA</option>
-              <option value="WI">WI</option>
-              <option value="WV">WV</option>
-              <option value="WY">WY</option>
-            </select>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input type="password" name="user[password]">
-              <label for="password">Password</label>
+            <div class="col s12" >
+              <select name="user[state]">
+                <option value="" disabled selected>State</option>
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AR">AR</option>
+                <option value="AZ">AZ</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DC">DC</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="IA">IA</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="MA">MA</option>
+                <option value="MD">MD</option>
+                <option value="ME">ME</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MO">MO</option>
+                <option value="MS">MS</option>
+                <option value="MT">MT</option>
+                <option value="NC">NC</option>
+                <option value="NE">NE</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NV">NV</option>
+                <option value="NY">NY</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WI">WI</option>
+                <option value="WV">WV</option>
+                <option value="WY">WY</option>
+              </select>
             </div>
-          </div>
-          <p><i>&nbsp &nbsp*Password shoule be at least 8 characters.</i></p>
 
-          <div class="row">
-            <div class="input-field col s12">
-              <input type="password" name="user[password_confirmation]">
-              <label for="password_confirmation">Confirm Password</label>
+            <div class="row">
+              <div class="input-field col s12">
+                <input type="password" name="user[password]">
+                <label for="password">Password</label>
+              </div>
             </div>
-          </div>
+            <p><i>&nbsp &nbsp*Password shoule be at least 8 characters.</i></p>
 
-          <div class="input-field col s12">
-            <button style="background-color:#26a69a" class="waves-effect waves-light btn col s12">Update</button>
-          </form>
-          <% if flash[:errors] %>
+            <div class="row">
+              <div class="input-field col s12">
+                <input type="password" name="user[password_confirmation]">
+                <label for="password_confirmation">Confirm Password</label>
+              </div>
+            </div>
+
+            <div class="input-field col s12">
+              <button style="background-color:#26a69a" class="waves-effect waves-light btn col s12">Update</button>
+            </form>
+            <% if flash[:errors] %>
             <% flash[:errors].each do |error| %>
-              <h6 class="error_message"><%= error %></h6>
+            <h6 class="error_message"><%= error %></h6>
             <% end %>
-          <% end %>
+            <% end %>
+          </div>
         </div>
-    </div>
 
-    <div class="col s2">
+        <div class="col s2">
+        </div>
+      </div>
+  </main>
+
+  <footer id="footer">
+    <div class="row">
+      <div class="col s8">
+        <h5 class="white-text">The Space</h5>
+        <h6 class="grey-text text-lighten-4">© 2017 Isaac Yanbin La Copyright Text</h6>
+      </div>
+      <div class="col s4">
+        <h5 class="white-text">Links</h5>
+        <a href="#">NASA</a> | <a href="#">NASA Image</a> | <a href="#">Another</a>
+      </div>
     </div>
-  </div>
+  </footer>
 </body>

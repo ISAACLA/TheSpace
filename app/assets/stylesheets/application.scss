@@ -52,7 +52,11 @@ footer{
     height: 100px;
     padding: 1% 2% 1% 2%;
     color: rgb(255, 253, 208);
-    bottom: 0%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    // position: absolute;
+    // width: 100%
 }
 
 footer:hover{

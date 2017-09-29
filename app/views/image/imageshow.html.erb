@@ -1,76 +1,87 @@
 <body class="image_imageshow">
-  <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">The Space</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
-        <li><a href="/apod">APOD</a></li>
-        <li><a href="/images">Explore</a></li>
-        <li><a href="/events">Events</a></li>
-        <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
-        <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
+  <header>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">The Space</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
+          <li><a href="/apod">APOD</a></li>
+          <li><a href="/images">Explore</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
+          <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
 
-        <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
-          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <input type="hidden" name="_method" value="delete">
-          <input id='logoutbtn' type="submit" name="" value="Log Out">
-        </form>
-      </ul>
-    </div>
-  </nav>
+          <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="_method" value="delete">
+            <input id='logoutbtn' type="submit" name="" value="Log Out">
+          </form>
+        </ul>
+      </div>
+    </nav>
+  </header>
   <br>
   <br>
-
-  <div class="row">
-    <div class="col s2">
+  <main>
+    <div class="row">
+      <div class="col s2">
+      </div>
+      <div class="col s8">
+        <center>
+          <%= image_tag @image.image.url(:large), :id=> "theimage", :class => "materialboxed" %><br>
+        </center>
+      </div>
+      <div class="col s2">
+      </div>
     </div>
-    <div class="col s8">
-      <center>
-        <%= image_tag @image.image.url(:large), :id=> "theimage", :class => "materialboxed" %><br>
-      </center>
-    </div>
-    <div class="col s2">
-    </div>
-  </div>
-
-
-
-
-
-  <br>
-  <div class="container">
-    <ul class="collapsible" data-collapsible="accordion">
-      <li>
-        <div class="collapsible-header"><i class="material-icons">photo</i>Pioneer</div>
-        <% if @image.user.id == current_user.id %>
+    <br>
+    <div class="container">
+      <ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">photo</i>Pioneer</div>
+          <% if @image.user.id == current_user.id %>
           <div class="collapsible-body"><span>Myself</span></div>
-        <% else %>
+          <% else %>
           <div class="collapsible-body"><span><a href="/users/<%= @image.user.id %>/show"><%= @image.user.first_name %> <%= @image.user.last_name %></a></span></div>
-        <% end %>
-      </li>
-      <li>
-        <div class="collapsible-header"><i class="material-icons">title</i>Title</div>
-        <div class="collapsible-body"><span><%= @image.title %></span></div>
-      </li>
-      <li>
-        <div class="collapsible-header"><i class="material-icons">description</i>Description</div>
-        <div class="collapsible-body"><span><%= @image.description %></span></div>
-      </li>
-      <li>
-        <div class="collapsible-header"><i class="material-icons">thumb_up</i><%= @image.likes.count %> Likes</div>
-        <div class="collapsible-body"><span>
-          <% unless @image.users.include?(current_user)%>
+          <% end %>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">title</i>Title</div>
+          <div class="collapsible-body"><span><%= @image.title %></span></div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">description</i>Description</div>
+          <div class="collapsible-body"><span><%= @image.description %></span></div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">thumb_up</i><%= @image.likes.count %> Likes</div>
+          <div class="collapsible-body"><span>
+            <% unless @image.users.include?(current_user)%>
             <form class="" action="/likes/<%= @image.id %>" method="post">
               <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
               <input type="hidden" name="like[image_id]" value="<%= @image.id %>">
               <button><i class="small material-icons">thumb_up</i>Like</button>
             </form>
-          <% else %>
-              <button disabled><i class="small material-icons">thumb_up</i>Liked</button>
-          <% end %>
-        </span></div>
-      </li>
-    </ul>
-  </div>
+            <% else %>
+            <button disabled><i class="small material-icons">thumb_up</i>Liked</button>
+            <% end %>
+          </span></div>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <footer id="footer">
+    <div class="row">
+      <div class="col s8">
+        <h5 class="white-text">The Space</h5>
+        <h6 class="grey-text text-lighten-4">© 2017 Isaac Yanbin La Copyright Text</h6>
+      </div>
+      <div class="col s4">
+        <h5 class="white-text">Links</h5>
+        <a href="#">NASA</a> | <a href="#">NASA Image</a> | <a href="#">Another</a>
+      </div>
+    </div>
+  </footer>
 
 </body>

@@ -1,36 +1,38 @@
 <body class="event_index">
-  <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">The Space</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
-        <li><a href="/apod">APOD</a></li>
-        <li><a href="/images">Explore</a></li>
-        <li><a class="disabled" href="/events">Events</a></li>
-        <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
-        <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
-    
-        <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
-          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <input type="hidden" name="_method" value="delete">
-          <input id='logoutbtn' type="submit" name="" value="Log Out">
-        </form>
-      </ul>
-    </div>
-  </nav>
+  <header>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">The Space</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
+          <li><a href="/apod">APOD</a></li>
+          <li><a href="/images">Explore</a></li>
+          <li><a class="disabled" href="/events">Events</a></li>
+          <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
+          <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
+
+          <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="_method" value="delete">
+            <input id='logoutbtn' type="submit" name="" value="Log Out">
+          </form>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
   <br>
 
-<center>
-  <% if flash[:notice] %>
-    <% flash[:notice].each do |notice| %>
+  <main>
+    <center>
+      <% if flash[:notice] %>
+      <% flash[:notice].each do |notice| %>
       <h5 class="notice_message"><%= notice %></h5>
-    <% end %>
-  <% end %>
-  <h5>Create a new event <a href="/events/new">HERE</a></h5>
-</center>
+      <% end %>
+      <% end %>
+      <h5>Create a new event <a href="/events/new">HERE</a></h5>
+    </center>
 
-  <!-- <div class="container"> -->
     <div class="row">
       <div class="col s2">
         <div class="state_list">
@@ -123,100 +125,44 @@
         </div>
       </div>
 
-    <div id="events" class="col s10">
-
+      <div id="events" class="col s10">
         <% if @state_events.length == 0 %>
-          <h6>*Please click on the states</h6>
+        <h6>*Please click on the states</h6>
         <% elsif %>
-          <h5>&nbsp &nbsp Events in <%= @state %></h5>
-          <div class="the_state_events">
-            <ul class="collapsible popout" data-collapsible="accordion">
-              <% @state_events.each do |state_event| %>
-              <li>
-                <div id="collapsible-header" class="collapsible-header"><i class="material-icons">event</i>
-                  <%= state_event.title %>
-                </div>
-                <div class="collapsible-body">
-                  <span>
-                    <i class="small material-icons">access_time</i><%= state_event.date.strftime('%B %d %Y')%> at <%= state_event.time.strftime("%I:%M%p") %><br>
-                    <br>
-                    <i class="small material-icons">add_location</i><%= state_event.address %>, <%= state_event.city %>, <%= state_event.state %>, <%= state_event.zipcode %><br>
-                    <br>
-                    <i class="small material-icons">message</i><%= state_event.description %><br>
-                    <a href="/events/<%= state_event.id %>">Show More</a>
-                    <hr>
-                    <% if state_event.user == current_user %>
-                      <div class="row">
-                          <div class="col s6">
-                            <a class="white_link" href="/events/<%= state_event.id %>/edit">Edit</a>
-                          </div>
-
-                          <div class="col s6">
-                            <a class="white_link" href="/events/<%= state_event.id%>" data-method='delete' data-confirm="Are you sure to delete?">Delete</a>
-                          </div>
-                      </div>
-                    <% end %>
-                    <% unless state_event.user_id == current_user.id %>
-                    <% unless state_event.users.include?(current_user) %>
-                    <form action="/attendees" method="post">
-                      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
-                      <input type="hidden" name="attendee[event_id]" value="<%= state_event.id %>">
-                      <button class='waves-effect btn'>Join</button>
-                    </form>
-                    <% else %>
-                    <div class="row">
-                      <div class="col s6">
-                        <span class="joining">Joining</span>
-                      </div>
-                      <div class="col s6">
-                        <a class="white_link" data-method='delete' data-confirm="Are you sure?" href="/attendees/<%= state_event.id %>">Cancel</a>
-                      </div>
-                    </div>
-                    <% end %>
-                    <% end %>
-                  </span>
-                </div>
-              </li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-        <br>
-        <hr>
-        <br>
-        <h5>&nbsp &nbsp Events in my stats - <%= current_user.state %></h5>
-        <ul class="collapsible popout" data-collapsible="accordion">
-          <% @my_state_events.each do |my_state_event| %>
+        <h5>&nbsp &nbsp Events in <%= @state %></h5>
+        <div class="the_state_events">
+          <ul class="collapsible popout" data-collapsible="accordion">
+            <% @state_events.each do |state_event| %>
             <li>
               <div id="collapsible-header" class="collapsible-header"><i class="material-icons">event</i>
-                <%= my_state_event.title %>
+                <%= state_event.title %>
               </div>
               <div class="collapsible-body">
                 <span>
-                  <i class="small material-icons">access_time</i><%= my_state_event.date.strftime('%B %d %Y')%></i> at <%= my_state_event.time.strftime("%I:%M%p") %><br>
+                  <i class="small material-icons">access_time</i><%= state_event.date.strftime('%B %d %Y')%> at <%= state_event.time.strftime("%I:%M%p") %><br>
                   <br>
-                  <i class="small material-icons">add_location</i><%= my_state_event.address %>, <%= my_state_event.city %>, <%= my_state_event.state %>, <%= my_state_event.zipcode %><br>
+                  <i class="small material-icons">add_location</i><%= state_event.address %>, <%= state_event.city %>, <%= state_event.state %>, <%= state_event.zipcode %><br>
                   <br>
-                  <i class="small material-icons">message</i><%= my_state_event.description %><br>
-                  <a href="/events/<%= my_state_event.id %>">Show More</a>
+                  <i class="small material-icons">message</i><%= state_event.description %><br>
+                  <a href="/events/<%= state_event.id %>">Show More</a>
                   <hr>
-                  <% if my_state_event.user == current_user %>
-                    <div class="row">
-                        <div class="col s6">
-                          <a class="white_link" href="/events/<%= my_state_event.id %>/edit">Edit</a>
-                        </div>
-
-                        <div class="col s6">
-                          <a class="white_link" href="/events/<%= my_state_event.id%>" data-method='delete' data-confirm="Are you sure to delete?">Delete</a>
-                        </div>
+                  <% if state_event.user == current_user %>
+                  <div class="row">
+                    <div class="col s6">
+                      <a class="white_link" href="/events/<%= state_event.id %>/edit">Edit</a>
                     </div>
+
+                    <div class="col s6">
+                      <a class="white_link" href="/events/<%= state_event.id%>" data-method='delete' data-confirm="Are you sure to delete?">Delete</a>
+                    </div>
+                  </div>
                   <% end %>
-                  <% unless my_state_event.user_id == current_user.id %>
-                  <% unless my_state_event.users.include?(current_user) %>
+                  <% unless state_event.user_id == current_user.id %>
+                  <% unless state_event.users.include?(current_user) %>
                   <form action="/attendees" method="post">
                     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
-                    <input type="hidden" name="attendee[event_id]" value="<%= my_state_event.id %>">
-                    <button class="waves-effect btn">Join</button>
+                    <input type="hidden" name="attendee[event_id]" value="<%= state_event.id %>">
+                    <button class='waves-effect btn'>Join</button>
                   </form>
                   <% else %>
                   <div class="row">
@@ -224,7 +170,7 @@
                       <span class="joining">Joining</span>
                     </div>
                     <div class="col s6">
-                      <a class="white_link" data-method='delete' data-confirm="Are you sure?" href="/attendees/<%= my_state_event.id %>">Cancel</a>
+                      <a class="white_link" data-method='delete' data-confirm="Are you sure?" href="/attendees/<%= state_event.id %>">Cancel</a>
                     </div>
                   </div>
                   <% end %>
@@ -232,8 +178,75 @@
                 </span>
               </div>
             </li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+        <br>
+        <hr>
+        <br>
+        <h5>&nbsp &nbsp Events in my stats - <%= current_user.state %></h5>
+        <ul class="collapsible popout" data-collapsible="accordion">
+          <% @my_state_events.each do |my_state_event| %>
+          <li>
+            <div id="collapsible-header" class="collapsible-header"><i class="material-icons">event</i>
+              <%= my_state_event.title %>
+            </div>
+            <div class="collapsible-body">
+              <span>
+                <i class="small material-icons">access_time</i><%= my_state_event.date.strftime('%B %d %Y')%></i> at <%= my_state_event.time.strftime("%I:%M%p") %><br>
+                <br>
+                <i class="small material-icons">add_location</i><%= my_state_event.address %>, <%= my_state_event.city %>, <%= my_state_event.state %>, <%= my_state_event.zipcode %><br>
+                <br>
+                <i class="small material-icons">message</i><%= my_state_event.description %><br>
+                <a href="/events/<%= my_state_event.id %>">Show More</a>
+                <hr>
+                <% if my_state_event.user == current_user %>
+                <div class="row">
+                  <div class="col s6">
+                    <a class="white_link" href="/events/<%= my_state_event.id %>/edit">Edit</a>
+                  </div>
 
+                  <div class="col s6">
+                    <a class="white_link" href="/events/<%= my_state_event.id%>" data-method='delete' data-confirm="Are you sure to delete?">Delete</a>
+                  </div>
+                </div>
+                <% end %>
+                <% unless my_state_event.user_id == current_user.id %>
+                <% unless my_state_event.users.include?(current_user) %>
+                <form action="/attendees" method="post">
+                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+                  <input type="hidden" name="attendee[event_id]" value="<%= my_state_event.id %>">
+                  <button class="waves-effect btn">Join</button>
+                </form>
+                <% else %>
+                <div class="row">
+                  <div class="col s6">
+                    <span class="joining">Joining</span>
+                  </div>
+                  <div class="col s6">
+                    <a class="white_link" data-method='delete' data-confirm="Are you sure?" href="/attendees/<%= my_state_event.id %>">Cancel</a>
+                  </div>
+                </div>
+                <% end %>
+                <% end %>
+              </span>
+            </div>
+          </li>
           <% end %>
         </ul>
-  <!-- </div> -->
+  </main>
+
+  <footer id="footer">
+    <div class="row">
+      <div class="col s8">
+        <h5 class="white-text">The Space</h5>
+        <h6 class="grey-text text-lighten-4">© 2017 Isaac Yanbin La Copyright Text</h6>
+      </div>
+      <div class="col s4">
+        <h5 class="white-text">Links</h5>
+        <a href="#">NASA</a> | <a href="#">NASA Image</a> | <a href="#">Another</a>
+      </div>
+    </div>
+  </footer>
 </body>

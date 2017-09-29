@@ -1,81 +1,82 @@
 <body class='login'>
-  <nav>
-    <div class="nav-wrapper">
-      <a href="/" class="brand-logo">The Space</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="/apod">APOD</a></li>
-        <li><a href="/images">Explore</a></li>
-        <li><a href="/register">Register</a></li>
-      </ul>
-    </div>
-  </nav>
-
+  <header>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo">The Space</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/apod">APOD</a></li>
+          <li><a href="/images">Explore</a></li>
+          <li><a href="/register">Register</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
   <br>
-
-  <div class="">
+  <main>
     <center>
-    <svg width="60%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
-      <path id="path">
-        <animate attributeName="d" from="m0,110 h0" to="m0,110 h1100" dur="6.8s" begin="0s" repeatCount="indefinite"/>
-      </path>
-      <text font-size="30" font-family="Montserrat" fill='white'>
-        <textPath xlink:href="#path">The Cosmos is all that is or was or ever will be. -Carl Sagan
-        </textPath>
-      </text>
-    </svg>
-  </div>
-
-  <center>
-
-    <% if flash[:errors] %>
+      <svg width="60%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+        <path id="path">
+          <animate attributeName="d" from="m0,110 h0" to="m0,110 h1100" dur="6.8s" begin="0s" repeatCount="indefinite"/>
+        </path>
+        <text font-size="30" font-family="Montserrat" fill='white'>
+          <textPath xlink:href="#path">The Cosmos is all that is or was or ever will be. -Carl Sagan
+          </textPath>
+        </text>
+      </svg>
+    </div>
+    <center>
+      <% if flash[:errors] %>
       <% flash[:errors].each do |error| %>
-        <h5 class="error_message"><%= error %></h5>
+      <h5 class="error_message"><%= error %></h5>
       <% end %>
-    <% end %>
+      <% end %>
 
-    <% if flash[:notice] %>
+      <% if flash[:notice] %>
       <% flash[:notice].each do |notice| %>
-        <h5 class="notice_message"><%= notice %></h5>
+      <h5 class="notice_message"><%= notice %></h5>
       <% end %>
-    <% end %>
-    
-    <div class="container-fluid">
-        <div class="row">
+      <% end %>
 
+      <div class="container-fluid">
+        <div class="row">
           <div class="col s3">
           </div>
-
           <div class="col s6">
             <form class="" action="/session" method="post">
               <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
-
               <div class="row">
                 <div class="input-field col s12">
                   <input type="email" name="email">
                   <label for="email">Email</label>
                 </div>
               </div>
-
               <div class="row">
                 <div class="input-field col s12">
                   <input type="password" name="password">
                   <label for="password">Password</label>
                 </div>
               </div>
-
               <button style="background-color:#26a69a" class="waves-effect waves-light btn">Log In</button>
-
-
             </form>
             <br>
             <h5>No account? Register <a href="/register">HERE</a></h5>
           </div>
-
-
           <div class="col s3">
           </div>
-
         </div>
       </div>
+  </main>
+  <footer id="footer">
+    <div class="row">
+      <div class="col s8">
+        <h5 class="white-text">The Space</h5>
+        <h6 class="grey-text text-lighten-4">© 2017 Isaac Yanbin La Copyright Text</h6>
+      </div>
+      <div class="col s4">
+        <h5 class="white-text">Links</h5>
+        <a href="#">NASA</a> | <a href="#">NASA Image</a> | <a href="#">Another</a>
+      </div>
+    </div>
+  </footer>
 
 </body>

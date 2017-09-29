@@ -19,6 +19,7 @@
 //= require_materialize.min
 //= require_materialize
 //= require_masonry.pkgd.min
+//= require imagesloaded
 
 
 //= require masonry/jquery.masonry
@@ -52,6 +53,14 @@ document.addEventListener('turbolinks:load', function(){
     // width: 500,
     height: 700,
     interval: 2000
+  });
+
+  $('#container').imagesLoaded( function() {
+    // images have loaded
+    $('.grid').masonry({
+      itemSelector: '.grid-item',
+      percentPosition: true,
+    });
   });
 
 });

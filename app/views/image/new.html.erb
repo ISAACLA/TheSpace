@@ -1,61 +1,72 @@
 <body class="image_new">
-  <nav id="image_new_nav">
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">The Space</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
-        <li><a href="/apod">APOD</a></li>
-        <li><a href="/images">Explore</a></li>
-        <li><a href="/events">Events</a></li>
-        <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
-        <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
+  <header>
+    <nav id="image_new_nav">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">The Space</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>Hi, <%= @user.first_name %>! &nbsp &nbsp</li>
+          <li><a href="/apod">APOD</a></li>
+          <li><a href="/images">Explore</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
+          <li><a href="/users/<%= current_user.id %>/profile">My Profile</a></li>
 
-        <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
-          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <input type="hidden" name="_method" value="delete">
-          <input id='logoutbtn' type="submit" name="" value="Log Out">
-        </form>
-      </ul>
-    </div>
-  </nav>
-
-
+          <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="_method" value="delete">
+            <input id='logoutbtn' type="submit" name="" value="Log Out">
+          </form>
+        </ul>
+      </div>
+    </nav>
+  </header>
   <br>
   <br>
+  <main>
+    <div class="container">
+      <div class="col s12">
+        <form class="" action="/newimages" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+          <div class="col s12">
 
-  <div class="container">
-    <div class="col s12">
-      <form class="" action="/newimages" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
-        <div class="col s12">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>File</span>
+                <input type="file" name="image[image]">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
 
-          <div class="file-field input-field">
-            <div class="btn">
-              <span>File</span>
-              <input type="file" name="image[image]">
-            </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
-            </div>
+            <!-- <input type="file" name="image[image]" value=""> -->
           </div>
-
-          <!-- <input type="file" name="image[image]" value=""> -->
-        </div>
-        <div class="input-field col s6">
-          <input type="text" name="image[title]" value="">
-          <label for="title">Title</label>
-        </div>
-        <div class="input-field col s12">
-          <textarea name="image[description]" class="materialize-textarea"></textarea>
-          <label for="description">Description</label>
-        </div>
-        <div class="col s6">
-          <button class="waves-effect waves-light btn">Add Image</button>
-        </div>
-      </form>
+          <div class="input-field col s6">
+            <input type="text" name="image[title]" value="">
+            <label for="title">Title</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea name="image[description]" class="materialize-textarea"></textarea>
+            <label for="description">Description</label>
+          </div>
+          <div class="col s6">
+            <button class="waves-effect waves-light btn">Add Image</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
+  </main>
 
-
-
+  <footer id="footer">
+    <div class="row">
+      <div class="col s8">
+        <h5 class="white-text">The Space</h5>
+        <h6 class="grey-text text-lighten-4">© 2017 Isaac Yanbin La Copyright Text</h6>
+      </div>
+      <div class="col s4">
+        <h5 class="white-text">Links</h5>
+        <a href="#">NASA</a> | <a href="#">NASA Image</a> | <a href="#">Another</a>
+      </div>
+    </div>
+  </footer>
 </body>

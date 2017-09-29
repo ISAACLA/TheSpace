@@ -32,4 +32,12 @@ document.addEventListener('turbolinks:load', function(){
     itemSelector: '.grid-item',
     percentPosition: true,
   });
+
+  $('#container').imagesLoaded( function() {
+    // images have loaded
+    $('.grid').masonry({
+      itemSelector: '.grid-item',
+      percentPosition: true,
+    });
+  });
 }
