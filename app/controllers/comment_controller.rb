@@ -3,7 +3,7 @@ class CommentController < ApplicationController
     @image = Image.find(params[:id])
     @comment = Comment.new (comment_params)
     if @comment.save
-      flash[:notice]=["You have submitted your comment"]
+      # flash[:notice]=["You have submitted your comment"]
       redirect_to "/images/#{@image.id}/show"
     else
       flash[:errors]=@comment.errors.full_messages
@@ -15,7 +15,7 @@ class CommentController < ApplicationController
     @event = Event.find(params[:id])
     @comment = Comment.new (comment_params)
     if @comment.save
-      flash[:notice]=['You have submitted your comment']
+      # flash[:notice]=['You have submitted your comment']
       redirect_to "/events/#{@event.id}"
     else
       flash[:errors] = @comment.errors.full_messages
