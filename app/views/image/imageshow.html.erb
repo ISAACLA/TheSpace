@@ -23,6 +23,7 @@
   <br>
   <br>
   <main>
+
     <div class="row">
       <div class="col s2">
       </div>
@@ -38,7 +39,7 @@
     <div class="container">
       <ul class="collapsible" data-collapsible="accordion">
         <li>
-          <div class="collapsible-header"><i class="material-icons">photo</i>Pioneer</div>
+          <div id="collapsible-header" class="collapsible-header"><i class="material-icons">photo</i>Pioneer</div>
           <% if @image.user.id == current_user.id %>
           <div class="collapsible-body"><span>Myself</span></div>
           <% else %>
@@ -46,31 +47,32 @@
           <% end %>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">title</i>Title</div>
+          <div id="collapsible-header" class="collapsible-header"><i class="material-icons">title</i>Title</div>
           <div class="collapsible-body"><span><%= @image.title %></span></div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">description</i>Description</div>
+          <div id="collapsible-header" class="collapsible-header"><i class="material-icons">description</i>Description</div>
           <div class="collapsible-body"><span><%= @image.description %></span></div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">thumb_up</i><%= @image.likes.count %> Likes</div>
+          <div id="collapsible-header" class="collapsible-header"><i class="material-icons">thumb_up</i><%= @image.likes.count %> Likes</div>
           <div class="collapsible-body"><span>
             <% unless @image.users.include?(current_user)%>
             <form class="" action="/likes/<%= @image.id %>" method="post">
               <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
               <input type="hidden" name="like[image_id]" value="<%= @image.id %>">
-              <button><i class="small material-icons">thumb_up</i>Like</button>
+              <button class="waves-effect waves-light btn"><i class="small material-icons">thumb_up</i>Like</button>
             </form>
             <% else %>
-            <button disabled><i class="small material-icons">thumb_up</i>Liked</button>
+            <button disabled class="waves-effect waves-light btn"><i class="small material-icons">thumb_up</i>Liked</button>
             <% end %>
           </span></div>
         </li>
       </ul>
     </div>
   </main>
-
+  <br><br>
+  <br><br>
   <footer id="footer">
     <div class="row">
       <div class="col s8">

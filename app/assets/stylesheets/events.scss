@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body.event_new{
-  background: url(/e-new3.jpeg);
+  background: url(/e-new99.jpg);
   background-position: center center;
   background-repeat:  no-repeat;
   background-attachment: fixed;
@@ -25,6 +25,16 @@ body.event_index{
 
 body.event_show{
   background: url(/event_show.jpg);
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+  background-color: rgba(31, 52, 238, 0.48);
+  color: rgb(255, 253, 208);
+}
+
+body.event_edit{
+  background: url(/e-edit2.jpg);
   background-position: center center;
   background-repeat:  no-repeat;
   background-attachment: fixed;
@@ -138,7 +148,8 @@ body.event_show{
 }
 
 .collapsible-body{
-  background-color: rgba(91, 87, 86, 0.6)
+  background-color: rgba(91, 87, 86, 0.6);
+  color: rgb(255, 253, 208);
 }
 
 #show-header{

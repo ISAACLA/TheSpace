@@ -39,7 +39,7 @@ body.imageshow{
 
 #button{
   position:fixed;
-  bottom: 10%;
+  bottom: 15%;
   left: 40%;
   margin: auto;
 }
@@ -56,11 +56,48 @@ body.imageshow{
   // height: auto
 }
 
-body.image_new{
-  background-color: black;
+#collapsible-header{
+  // color: black;
+  background-color: rgba(48, 44, 43, 0.7);
+  font-size: x-larger;
+  font-family:sans-serif;
   color: rgb(255, 253, 208);
 }
 
-#image_new_nav{
-  border-bottom: 5px solid rgb(255, 253, 208)
+
+body.image_new{
+  background: url(/image-new2.jpg);
+  background-color: black;
+  color: rgb(255, 253, 208);
+  margin:0 auto;
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+}
+
+body.image_imageshow {
+  background: linear-gradient(132deg, black, white);
+  background-size: 400% 400%;
+  animation: BackgroundGradient 30s ease infinite;
+}
+
+// h1 {
+//   position: absolute;
+//   left: 50%;
+//   top: 50%;
+//   transform: translateX(-50%) translateY(-50%);
+//   font-family: Open Sans, sans-serif;
+//   color: #fff;
+//   font-weight: 400;
+//   text-transform: uppercase;
+//   text-align: center;
+//   font-size: 2em;
+//   padding: 5px;
+// }
+
+@keyframes BackgroundGradient {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
 }
