@@ -2,9 +2,9 @@ class LikeController < ApplicationController
 
   def create
     @user = User.find(current_user.id)
-    # @image = Image.find(params[:id])
+    @image = Image.find(params[:id])
     Like.create like_parmas
-    redirect_to "/users/#{@user.id}/main"
+    redirect_to "/images/#{@image.id}/show"
   end
 
   private
