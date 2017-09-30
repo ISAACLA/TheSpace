@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get 'events/state/:state' => 'events#index'
 
 
-  post 'attendees' => 'attendees#create'
+  post 'attendees/:id' => 'attendees#create'
   delete 'attendees/:id' => 'attendees#destroy'
 
   get 'images/new' => 'image#new'

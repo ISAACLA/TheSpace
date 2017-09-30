@@ -40,4 +40,4 @@ document.addEventListener('turbolinks:load', function(){
       percentPosition: true,
     });
   });
-}
+})

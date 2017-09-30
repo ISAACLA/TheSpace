@@ -27,115 +27,147 @@
   <br>
 
   <main>
-    <div class="container">
-      <ul class="collapsible" data-collapsible="accordion">
-        <li>
-          <div id="show-header"><i class="medium material-icons">event</i> &nbsp; <%= @event.title %></div>
-          <!-- <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div> -->
-        </li>
-        <li>
-          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">date_range</i>&nbsp; &nbsp; DATE </div>
-          <div class="collapsible-body"><span><%= @event.date.strftime('%B %d %Y')%></span></div>
-        </li>
-        <li>
-          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">access_time</i>&nbsp; &nbsp; TIME</div>
-          <div class="collapsible-body"><span><%= @event.time.strftime("%I:%M %p") %></span></div>
-        </li>
-        <li>
-          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">place</i>&nbsp; &nbsp; Location</div>
-          <div class="collapsible-body"><span><%= @event.address %>, <%= @event.city %>, <%= @event.state %> <%= @event.zipcode %></span></div>
-        </li>
-        <li>
-          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">person_outline</i>&nbsp; &nbsp; Hoster</div>
-          <% unless @event.user == @user %>
-          <div class="collapsible-body"><span>
-            <a href="/users/<%= @event.user.id %>/show"> <%= @event.user.first_name %> <%= @event.user.last_name %> </a>
-          </span></div>
-          <% else %>
-          <div class="collapsible-body"><span>
-            My Event
-          </span></div>
-          <% end %>
-        </li>
-        <li>
-          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">message</i>&nbsp; &nbsp; Description</div>
-          <div class="collapsible-body"><span><%= @event.description %></span></div>
-        </li>
-        <li>
-          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">details</i>&nbsp; &nbsp; Action</div>
-          <div class="collapsible-body"><span>
-            <% if @event.user == current_user %>
-            <div class="row">
-              <div class="col s6">
-                <a class="white_link" href="/events/<%= @event.id %>/edit">Edit</a>
-              </div>
-              <div class="col s6">
-                <a class="white_link" href="/events/<%= @event.id%>" data-method='delete' data-confirm="Are you sure to delete?">Delete</a>
-              </div>
-            </div>
-            <% end %>
-            <% unless @event.user_id == current_user.id %>
-            <% unless @event.users.include?(current_user) %>
-            <form action="/attendees" method="post">
-              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
-              <input type="hidden" name="attendee[event_id]" value="<%= @event.id %>">
-              <input class='waves-effect btn' type="submit" name="" value="Join">
-            </form>
-            <% else %>
-            <div class="row">
-              <div class="col s6">
-                <span class="joining">Joining</span>
-              </div>
-              <div class="col s6">
-                <a class="white_link" data-method='delete' data-confirm="Are you sure?" href="/attendees/<%= @event.id %>">Cancel</a>
-              </div>
-            </div>
-            <% end %>
-            <% end %>
-          </span></div>
-        </li>
-        <li>
-          <div id="collapsible-header" class="collapsible-header"><i class="small material-icons">people</i>&nbsp; &nbsp; Attendees</div>
-          <div class="collapsible-body"><span>
-
-            <ul id="collection-item" class="collection">
-              <% @event.attendees.each do |attendee| %>
-              <% unless attendee.user == current_user %>
-              <li id="collection-item"  class="collection-item">
-                <a href="/users/<%= attendee.user.id %>/show"><%= attendee.user.first_name %> <%= attendee.user.last_name %></a>
-              </li>
-              <% else %>
-              <li id="collection-item"  class="collection-item">
-                Me, Yes me.
-              </li>
-              <% end %>
-              <% end %>
-            </ul>
-          </span></div>
-        </li>
-      </ul>
-    </div>
-
-    <div class="container">
-      <form class="" action="/events/<%= @event.id %>/comment" method="post">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        <input type="hidden" name="comment[commentable_id]" value="<%= @event.id %>">
-        <input type="hidden" name="comment[commentable_type]" value="Event">
-        <textarea name="comment[comment]" rows="8" cols="80"></textarea>
-        <button >Add Comment</button>
-      </form>
-
-      <div class="event_comments">
-        <% @comments.each do |comment| %>
-          <h6><%= comment.user.first_name %> says: <%= comment.comment %></h6>
+    <center>
+      <% if flash[:notice] %>
+        <% flash[:notice].each do |notice| %>
+          <h5 class="notice_message"><%= notice %></h5>
         <% end %>
+      <% end %>
+    </center>
+
+    <div class="row">
+      <div class="col s7">
+        <div style="width:90%; margin:auto" id="event_show_box">
+          <h4><i class="medium material-icons">event_available</i> &nbsp;&nbsp;  <%= @event.title %></h4>
+          <br>
+            <ul>
+              <li>
+                <div id="event_date_header" class="event_header"><h5><i class="small material-icons">date_range</i>&nbsp;&nbsp;Date</h5></div>
+                <div id="event_date_body" class="event_body">
+                  <span><%= @event.date.strftime('%B %d %Y')%></span>
+                </div>
+              </li>
+              <li>
+                <div id="event_time_header" class="event_header"><h5><i class="small material-icons">access_time</i>&nbsp;&nbsp;Time</h5></div>
+                <div id="event_time_body" class="event_body">
+                  <span><%= @event.time.strftime("%I:%M %p") %> </span>
+                </div>
+              </li>
+              <li>
+                <div id="event_location_header" class="event_header"><h5><i class="small material-icons">place</i>&nbsp;&nbsp;Location</h5></div>
+                <div id="event_location_body" class="event_body">
+                  <span><%= @event.address %>, <%= @event.city %>, <%= @event.state %> <%= @event.zipcode %></span>
+                </div>
+              </li>
+              <li>
+                <div id="event_hoster_header" class="event_header"><h5><i class="small material-icons">person_outline</i>&nbsp;&nbsp;Hoster</h5></div>
+                <% if @event.user == current_user %>
+                  <div id="event_hoster_body" class="event_body_height">
+                    <span>I am the hoster.</span>
+                  </div>
+                <% else %>
+                  <div id="event_hoster_body" class="event_body_height">
+                    <span><a href="/users/<%= @event.user.id %>/show"> <%= @event.user.first_name %> <%= @event.user.last_name %></a></span>
+                  </div>
+                <% end %>
+              </li>
+              <li>
+                <div id="event_detail_header" class="event_header"><h5><i class="small material-icons">message</i>&nbsp;&nbsp;Detail</h5></div>
+                <div id="event_detail_body" class="event_body_height">
+                  <span><%= @event.description %></span>
+                </div>
+              </li>
+              <li>
+                <div id="event_action_header" class="event_header"><h5><i class="small material-icons">details</i>&nbsp;&nbsp;Action</h5></div>
+                <div id="event_action_body" class="event_body_height">
+                  <span>
+                    <% if @event.user == current_user %>
+                    <div class="row">
+                      <div class="col s6">
+                        <a class="white_link" href="/events/<%= @event.id %>/edit">Edit</a>
+                      </div>
+                      <div class="col s6">
+                        <a class="white_link" href="/events/<%= @event.id%>" data-method='delete' data-confirm="Are you sure to delete?">Delete</a>
+                      </div>
+                    </div>
+                    <% end %>
+                    <% unless @event.user_id == current_user.id %>
+                    <% unless @event.users.include?(current_user) %>
+                    <form action="/attendees/<%= @event.id %>" method="post">
+                      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+                      <input type="hidden" name="attendee[event_id]" value="<%= @event.id %>">
+                      <input class='waves-effect btn' type="submit" name="" value="Join">
+                    </form>
+                    <% else %>
+                    <div class="row">
+                      <div class="col s6">
+                        <span class="joining">Joining</span>
+                      </div>
+                      <div class="col s6">
+                       <a class="white_link" data-method='delete' data-confirm="Are you sure?" href="/attendees/<%= @event.id %>">Cancel</a>
+                      </div>
+                    </div>
+                    <% end %>
+                    <% end %>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div id="event_attendees_header" class="event_header"><h5><i class="small material-icons">people</i>&nbsp;&nbsp;Attendees</h5></div>
+                <div id="event_attendees_body" class="event_body_height">
+                  <ul>
+                    <% @event.attendees.each do |attendee| %>
+                    <% unless attendee.user == current_user %>
+                    <li>
+                      <a href="/users/<%= attendee.user.id %>/show"><%= attendee.user.first_name %> <%= attendee.user.last_name %></a>
+                    </li>
+                    <% else %>
+                    <li>
+                      Yeah, I am going!
+                    </li>
+                    <% end %>
+                    <% end %>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+
+          </div>
+      </div>
+      <div style="padding-right:4%; margin-top:125px" class="col s5">
+
+        <div class="event_comments">
+          <ul class="collection">
+            <li id="collection-header" class="collection-header">Comments</li>
+            <% @comments.each do |comment| %>
+              <% unless comment.user == current_user %>
+                <li id="collection-item" class="collection-item"><span>
+                <a href="/users/<%= comment.user.id %>/show"><%= comment.user.first_name %> <%= comment.user.last_name %></a> </span> says: <%= comment.comment %></li>
+              <% else %>
+                <li id="collection-item" class="collection-item">Me: <%= comment.comment %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+        <br>
+        <br>
+        <div class="addcomment">
+          <form class="" action="/events/<%= @event.id %>/comment" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="comment[commentable_id]" value="<%= @event.id %>">
+            <input type="hidden" name="comment[commentable_type]" value="Event">
+            <textarea name="comment[comment]" rows="10" cols="80"></textarea>
+            <button class="waves-effect waves-light btn">Add Comment</button>
+          </form>
+        </div>
       </div>
     </div>
-  </main>
-  <br><br>
-  <br><br>
 
-  <footer id="footer">
+
+
+
+
+  <footer style="margin-top:120px" id="footer">
     <div class="row">
       <div class="col s8">
         <h5 class="white-text">The Space</h5>

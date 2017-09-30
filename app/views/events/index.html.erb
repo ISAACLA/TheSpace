@@ -25,11 +25,6 @@
 
   <main>
     <center>
-      <% if flash[:notice] %>
-      <% flash[:notice].each do |notice| %>
-      <h5 class="notice_message"><%= notice %></h5>
-      <% end %>
-      <% end %>
       <h5>Create a new event <a href="/events/new">HERE</a></h5>
     </center>
 
@@ -159,7 +154,7 @@
                   <% end %>
                   <% unless state_event.user_id == current_user.id %>
                   <% unless state_event.users.include?(current_user) %>
-                  <form action="/attendees" method="post">
+                  <form action="/attendees/<%= state_event.id%>" method="post">
                     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
                     <input type="hidden" name="attendee[event_id]" value="<%= state_event.id %>">
                     <button class='waves-effect btn'>Join</button>
@@ -214,7 +209,7 @@
                 <% end %>
                 <% unless my_state_event.user_id == current_user.id %>
                 <% unless my_state_event.users.include?(current_user) %>
-                <form action="/attendees" method="post">
+                <form action="/attendees/<%= my_state_event.id %>" method="post">
                   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
                   <input type="hidden" name="attendee[event_id]" value="<%= my_state_event.id %>">
                   <button class="waves-effect btn">Join</button>

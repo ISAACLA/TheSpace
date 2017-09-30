@@ -46,7 +46,7 @@
             <% @images.each do |image| %>
             <li id="profile_image" class="profile_image">
               <a href="/images/<%= image.id %>/show">
-                <%= image_tag image.image.url(:medium), :id => "profileimage"%>
+                <%= image_tag image.image.url(:large), :id => "profileimage"%>
               </a>
               <div class="caption center-align">
                 <h4 class="imagetitle"> <%= image.title %></h4>
