@@ -142,9 +142,9 @@
             <% @comments.each do |comment| %>
               <% unless comment.user == current_user %>
                 <li id="collection-item" class="collection-item"><span>
-                <a href="/users/<%= comment.user.id %>/show"><%= comment.user.first_name %> <%= comment.user.last_name %></a> </span> says: <%= comment.comment %></li>
+                <a href="/users/<%= comment.user.id %>/show"><%= comment.user.first_name %> <%= comment.user.last_name %></a> </span> says: <%= comment.comment %> <span class="comment_time"><%= comment.created_at.strftime('%B %d %Y - %I:%M %p')%></li>
               <% else %>
-                <li id="collection-item" class="collection-item">Me: <%= comment.comment %></li>
+                <li id="collection-item" class="collection-item">Me: <%= comment.comment %><span class="comment_time"><%= comment.created_at.strftime('%B %d %Y - %I:%M %p')%></li>
               <% end %>
             <% end %>
           </ul>
@@ -156,7 +156,10 @@
             <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
             <input type="hidden" name="comment[commentable_id]" value="<%= @event.id %>">
             <input type="hidden" name="comment[commentable_type]" value="Event">
-            <textarea name="comment[comment]" rows="10" cols="80"></textarea>
+            <div class="input-field col s12">
+              <textarea name="comment[comment]" class="materialize-textarea"></textarea>
+              <label for="description">Description</label>
+            </div>
             <button class="waves-effect waves-light btn">Add Comment</button>
           </form>
         </div>

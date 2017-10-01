@@ -78,9 +78,10 @@ body.image_new{
 
 //  image show background gradien effects
 body.image_imageshow {
-  background: linear-gradient(132deg, black, white);
+  background: linear-gradient(132deg, grey, blue);
   background-size: 400% 400%;
   animation: BackgroundGradient 30s ease infinite;
+  color: rgb(255, 253, 208);
 }
 
 @keyframes BackgroundGradient {
@@ -89,3 +90,57 @@ body.image_imageshow {
   100% {background-position: 0% 50%;}
 }
 //  ends here gradient
+
+.image_header{
+  background-color: rgba(48, 44, 43, 0.7);
+  font-size: larger;
+  font-family:sans-serif;
+  color: rgb(255, 253, 208);
+  height: 70px;
+  padding: 2%;
+  padding-left: 5%;
+  border: 1px solid rgb(255, 253, 208);
+}
+
+.image_header:hover{
+  cursor: pointer;
+}
+
+.image_body{
+  background-color: rgba(91, 87, 86, 0.6);
+  color: rgb(255, 253, 208);
+  border: 1px solid rgb(255, 253, 208);
+  height: 60px;
+  padding: 3%;
+  text-align: center;
+  display: none;
+}
+
+.image_body_height{
+  background-color: rgba(91, 87, 86, 0.6);
+  color: rgb(255, 253, 208);
+  border: 1px solid rgb(255, 253, 208);
+  height: auto;
+  padding: 3%;
+  text-align: center;
+  display: none;
+}
+
+#collection-header{
+  background-color: rgba(48, 44, 43, 0.7);
+  text-align: center;
+  font-size: x-large;
+  height: 60px;
+  padding: 2%;
+}
+
+#collection-item{
+  background-color: rgba(91, 87, 86, 0.6);
+  color: rgb(255, 253, 208);
+}
+
+.comment_time{
+  font-style: italic;
+  font-size: smaller;
+  color:lightgreen;
+}

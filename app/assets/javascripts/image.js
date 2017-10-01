@@ -3,7 +3,19 @@
 
 document.addEventListener('turbolinks:load', function(){
 
-
+  $('#image_header_pioneer').click(function(){
+    $('#image_body_pioneer').toggle('slow')
+  })
+  $('#image_header_title').click(function(){
+    $('#image_body_title').toggle('slow')
+  })
+  $('#image_header_detail').click(function(){
+    $('#image_body_detail').toggle('slow')
+  })
+  $('#image_header_like').click(function(){
+    $('#image_body_like').toggle('slow')
+  })
+  
   var nasaurl = "https://api.nasa.gov/planetary/apod";
   var key = "&api_key=uupOQAQKOCvrpRJ87aNIiAKESnvZYnFdNTdgkHvx";
 
@@ -49,5 +61,6 @@ document.addEventListener('turbolinks:load', function(){
       infoBtn.innerText = 'Show Info';
     }
   })
+
 
 })

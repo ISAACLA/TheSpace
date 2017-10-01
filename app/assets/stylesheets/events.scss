@@ -208,10 +208,16 @@ body.event_edit{
   text-align: center;
   font-size: x-large;
   height: 60px;
-  padding: 5%;
+  padding: 2%;
 }
 
 #collection-item{
   background-color: rgba(91, 87, 86, 0.6);
   color: rgb(255, 253, 208);
+}
+
+.comment_time{
+  font-style: italic;
+  font-size: smaller;
+  color:lightgreen;
 }
