@@ -43,25 +43,15 @@ document.addEventListener('turbolinks:load', function(){
   $('.carousel').carousel();
   $('.carousel.carousel-slider').carousel({fullWidth: true});
 
-  // $('selector').masonry()
-  $('.grid').masonry({
-    itemSelector: '.grid-item',
-    percentPosition: true,
-  });
-
   $('.slider').slider({
     // width: 500,
     height: 700,
     interval: 2000
   });
 
-  $('#container').imagesLoaded( function() {
-    // images have loaded
-    $('.grid').masonry({
-      itemSelector: '.grid-item',
-      percentPosition: true,
-    });
+
   });
+
 
   var modal = document.getElementById('myModal');
 
@@ -70,9 +60,9 @@ document.addEventListener('turbolinks:load', function(){
   var modalImg = document.getElementById("img01");
   var captionText = document.getElementById("caption");
   img.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    captionText.innerHTML = this.alt;
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      captionText.innerHTML = this.alt;
   }
 
   // Get the <span> element that closes the modal
@@ -82,25 +72,5 @@ document.addEventListener('turbolinks:load', function(){
   span.onclick = function() {
     modal.style.display = "none";
   }
+
 });
-//
-// $(document).on('ready page:load', function () {
-//     $('.collapsible').collapsible();
-//     $('ul.tabs').tabs();
-//     $('.carousel').carousel();
-//     $('.carousel.carousel-slider').carousel({fullWidth: true});
-//
-//     //  user.js
-//     $('selector').masonry()
-//     $('.grid').masonry({
-//       itemSelector: '.grid-item',
-//       percentPosition: true,
-//     });
-//
-//     // $('.collapsible').collapsible();
-//     $('.slider').slider({
-//       // width: 500,
-//       height: 700,
-//       interval: 2000
-//     });
-// });
