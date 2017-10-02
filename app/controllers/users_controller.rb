@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     before_action :require_login, only: [:main, :show, :profile, :edit, :update, :userimages]
     before_action :require_correct_user_users, only: [:edit, :update]
-    before_action :require_only_profile, only: [:show]
+    before_action :require_only_profile, only: [:show, :userimages]
 
   def create
     @user = User.new(user_params)
