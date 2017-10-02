@@ -71,3 +71,15 @@ footer{
 footer:hover{
   background: rgba(10, 10, 10, 1);
 }
+
+.notice_message{
+  color: green;
+  font-style: oblique;
+  font-size: xx-large;
+}
+
+.error_message{
+  color:red;
+  font-style: italic;
+  font-size: xx-large;
+}

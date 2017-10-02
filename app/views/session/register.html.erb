@@ -52,6 +52,11 @@
         </div>
 
         <div class="col s6">
+          <% if flash[:errors] %>
+            <% flash[:errors].each do |error| %>
+              <h6 class="error_message"><%= error %></h6>
+              <% end %>
+          <% end %>
           <div class="registerform">
             <h5>&nbsp Please Register</h5>
             <h6><i>&nbsp Already have an account with us? Click <a href="/login">HERE</a> to login.</i></h6>
@@ -157,11 +162,6 @@
                 <button style="background-color:#26a69a" class="waves-effect waves-light btn col s12">Register</button>
               </div>
               </form>
-              <% if flash[:errors] %>
-              <% flash[:errors].each do |error| %>
-              <h6 class="error_message"><%= error %></h6>
-              <% end %>
-              <% end %>
           </div>
         </div>
   </main>

@@ -21,8 +21,8 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     if @event.save
       flash[:notice]=["You have successfully created an Event."]
-      redirect_to "/users/#{@user.id}/profile"
-      # redirect_to '/events'
+      # redirect_to "/users/#{@user.id}/profile"
+      redirect_to "/events/#{@event.id}"
     else
       flash[:errors]=@event.errors.full_messages
       redirect_to :back

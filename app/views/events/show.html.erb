@@ -144,7 +144,7 @@
                 <li id="collection-item" class="collection-item"><span>
                 <a href="/users/<%= comment.user.id %>/show"><%= comment.user.first_name %> <%= comment.user.last_name %></a> </span> says: <%= comment.comment %> <span class="comment_time"><%= comment.created_at.strftime('%B %d %Y - %I:%M %p')%></li>
               <% else %>
-                <li id="collection-item" class="collection-item">Me: <%= comment.comment %><span class="comment_time"><%= comment.created_at.strftime('%B %d %Y - %I:%M %p')%></li>
+                <li id="collection-item" class="collection-item">Me: <%= comment.comment %><span class="comment_time"> <%= comment.created_at.strftime('%B %d %Y - %I:%M %p')%></li>
               <% end %>
             <% end %>
           </ul>

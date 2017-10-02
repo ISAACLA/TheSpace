@@ -22,4 +22,9 @@ class ApplicationController < ActionController::Base
     user = User.find(params[:id])
     redirect_to "/users/#{current_user.id}/profile" if current_user.id != user.id
   end
+
+  def require_only_profile
+    user = User.find(params[:id])
+    redirect_to "/users/#{user.id}/profile" if current_user.id == user.id
+  end
 end
