@@ -41,11 +41,17 @@ nav:hover{
 #logoutbtn{
   background-color: #26A69A;
   border-radius: 2px;
+  margin-left: 5px;
 }
 
 .disabled{
   pointer-events: none;
   cursor: default;
+  border-bottom: 3px solid lightblue;
+}
+
+nav li:hover{
+  border-bottom: 3px solid lightblue;
 }
 
 footer{
@@ -58,6 +64,7 @@ footer{
     left: 0;
     // position: fixed;
     position: relative;
+    // position: absolute;
     // width: 100%
 }
 

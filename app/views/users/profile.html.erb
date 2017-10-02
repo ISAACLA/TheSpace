@@ -1,5 +1,6 @@
+
 <body class="user_profile">
-  <header>
+  <header style="height:100%">
     <nav id="profile_nav">
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">The Space</a>
@@ -9,7 +10,8 @@
           <li><a href="/images">Explore</a></li>
           <li><a href="/events">Events</a></li>
           <li><a href="/users/<%= current_user.id %>/main">Dashboard</a></li>
-          <li><a href="/users/<%= @user.id %>/edit">Update Profile</a></li>
+          <!-- <li><a href="/users/<%= @user.id %>/edit">Update Profile</a></li> -->
+          <li><a class="disabled" href="/users/<%= current_user.id %>/profile">My Profile</a></li>
 
           <form style='display:inline-block' action="/session/<%= current_user.id %>" method="post">
             <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
@@ -21,106 +23,168 @@
     </nav>
   </header>
 
-  <br>
 
-  <main>
 
-    <% if flash[:notice] %>
-    <% flash[:notice].each do |notice| %>
-    <h6 class="notice_message"><%= notice %></h6>
-    <% end %>
-    <% end %>
-
-    <div class="row">
-      <div class="col s1">
-      </div>
-      <div class="col s10">
-        <h4 style="text-align:center">My Images</h4>
-        <center><span>*Add a new image <a href="/images/new">HERE</a></span></center>
-        <br>
-        <% if @images.length == 0 %>
-        <h4>I have not uploaded any image yet.</h4>
-        <% else %>
-        <div id="slider" class="slider" style="width:70%; margin:auto">
-          <ul id="slides" class="slides" >
-            <% @images.each do |image| %>
-            <li id="profile_image" class="profile_image">
-              <a href="/images/<%= image.id %>/show">
-                <%= image_tag image.image.url(:large), :id => "profileimage"%>
-              </a>
-              <div class="caption center-align">
-                <h4 class="imagetitle"> <%= image.title %></h4>
-              </div>
-            </li>
-            <% end %>
-          </ul>
-        </div>
+  <main style="height:100%">
+    <center>
+      <% if flash[:notice] %>
+        <% flash[:notice].each do |notice| %>
+          <h6 class="notice_message"><%= notice %></h6>
         <% end %>
-      </div>
-      <div class="col s1">
-      </div>
-    </div>
+      <% end %>
+    </center>
 
-    <br>
+    <ul id="sidebar">
+      <li id="my_profile_link" class="side-item">My Profile</li>
+      <li id="my_events_link" class="side-item">My Event</li>
+      <li id="my_images_link" class="side-item">My Images</li>
+      <li id="my_friends_link" class="side-item">My Friends</li>
+      <li class="side-item"><a href="/users/<%= @user.id %>/edit">Update Profile</a></li>
+      <li class="side-item"><a href="/events/new">Add Event</a></li>
+      <li class="side-item"><a href="/images/new">Add Image</a></li>
+    </ul>
 
-    <div class="container">
-      <div class="divider"></div>
-    </div>
-
-    <br>
-    <br>
-
-    <div class="container">
-      <div class="row">
-        <div class="col s6">
-          <h6>Attending</h6>
-            <% if @attending.length == 0 %>
-            <span>*I am not going to any event at this moment.</span>
-            <% else %>
-              <% @attending.each do |attending| %>
-                <div class="collection">
-                  <a id="collapsible-header" href="/events/<%= attending.event.id %>" class="collection-item"><i class="material-icons">event</i><%= attending.event.title %></a>
-                </div>
-              <% end %>
-            <% end %>
-        </div>
-
-        <div class="col s6">
-          <h6>Hosting</h6>
-          <% if @events.length ==0 %>
-            <span>*I am not hosting any events yet.</span>
-          <% else %>
-            <% @events.each do |event| %>
-              <div class="collection">
-                <a id="collapsible-header" href="/events/<%= event.id %>" class="collection-item"><i class="material-icons">event</i><%= event.title %></a>
+    <div id="thecontainer" class="container">
+      <br>
+      <br>
+          <div id="my_profile">
+            <center>
+            <div class="card blue-grey darken-1">
+              <div class="card-content white-text">
+                <span class="card-title">My Profile</span>
+                <hr>
+                <h4><%= @user.first_name %> <%= @user.last_name %></h4>
+                <h5><%= @user.email %></h5><br>
+                <h6><%= @user.state %> <%= @user.zipcode %></h6>
               </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-      <div class="divider"></div>
-      <div class="row">
-        <div class="col s6">
-          <h6>Friend List</h6>
-          <ul>
-            <%  for friendship in @user.friendships %>
-            <% %>
-            <li><a href="/users/<%= friendship.friend.id %>/show"> <%= friendship.friend.first_name %> <%= friendship.friend.last_name%></a> |
-              <a href="/friendship/<%= friendship.friend.id %>" data-method='delete' data-confirm='Are you sure to unfriend?'>Unfriend</a>
-            </li>
-            <% end %>
-          </ul>
-        </div>
+              <div class="card-action">
+                <a href="/users/<%= @user.id %>/edit">Update My Profile</a>
+              </div>
+            </div>
+            </center>
+            <br>
+            <hr>
+            <br>
+          </div>
 
-        <div class="col s6">
-          <h6>My Messages</h6>
-        </div>
+          <div id="my_events" style="display:none">
+            <div class="row">
+              <div id="profile_attending" class="col s6">
+                <h5 style="text-align:center">Attending</h5>
+                <hr>
+                <% if @attending.length == 0 %>
+                  <span>*I am not going to any event at this moment.</span>
+                <% else %>
+                <% @attending.each do |attending| %>
+                <ul>
+                    <li>
+                      <div id="profile_event_header" class="profile_event_header"><h5><i class="small material-icons">event</i>&nbsp;&nbsp;<%= attending.event.title %></h5></div>
+                      <div id="profile_event_body" class="profile_event_body">
+                        <span>
+                          <i class="small material-icons">access_time</i><%= attending.event.date.strftime('%B %d %Y')%> at <%= attending.event.time.strftime("%I:%M %p") %> <br>
+                          <a href="/events/<%= attending.event.id %>">Show More</a>
+                        </span>
+                      </div>
+                    </li>
+                </ul>
+                <% end %>
+                <% end %>
+              </div>
 
-      </div>
+
+              <div id="profile_hosting" class="col s6">
+                <h5 style="text-align:center">Hosting</h5>
+                <hr>
+                <% if @events.length ==0 %>
+                  <span>*I am not hosting any events yet.</span>
+                <% else %>
+                  <% @events.each do |event| %>
+                    <ul>
+                        <li>
+                          <div id="profile_event_header" class="profile_event_header"><h5><i class="small material-icons">event</i>&nbsp;&nbsp;<%= event.title %></h5></div>
+                          <div id="profile_event_body" class="profile_event_body">
+                            <span>
+                              <i class="small material-icons">access_time</i><%= event.date.strftime('%B %d %Y')%> at <%= event.time.strftime("%I:%M %p") %> <br>
+                              <a href="/events/<%= event.id %>">Show More</a>
+                            </span>
+                          </div>
+                        </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div id="my_images" style="display:none">
+            <div class="w3-content w3-display-container">
+              <% if @images.length == 0 %>
+                <h4>I have not uploaded any image yet.</h4>
+              <% else %>
+                <% @images.each do |image| %>
+                  <div class="w3-display-container mySlides">
+                    <a href="/images/<%= image.id %>/show">
+                      <%= image_tag image.image.url(:large), :width => '90%', :height => ' 700px'%>
+                    </a>
+                    <div class="w3-display-bottomright w3-large w3-container w3-padding-16 w3-black">
+                      <h5><%= image.title %></h5>
+                    </div>
+                  </div>
+                <% end %>
+                <button class="waves-effect waves-light btn" onclick="plusDivs(-1)">&#10094;</button>
+                <button class="waves-effect waves-light btn" onclick="plusDivs(1)">&#10095;</button>
+              <% end %>
+            </div>
+
+            <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+            <script>
+              var slideIndex = 1;
+              showDivs(slideIndex);
+
+              function plusDivs(n) {
+                showDivs(slideIndex += n);
+              }
+
+              function showDivs(n) {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                if (n > x.length) {slideIndex = 1}
+                if (n < 1) {slideIndex = x.length}
+                for (i = 0; i < x.length; i++) {
+                   x[i].style.display = "none";
+                }
+                x[slideIndex-1].style.display = "block";
+              }
+            </script>
+
+          </div>
+
+          <div id="my_friends" style="display:none">
+            <ul class="collection with-header" style="width:80%; margin:auto">
+              <li id="profile_friends_header" class="collection-header"><h5>My Friend List</h5></li>
+              <% for friendship in @user.friendships %>
+              <li id="my_friend" class="collection-item">
+                <div><a href="/users/<%= friendship.friend.id %>/show">
+                  <h5><%= friendship.friend.first_name %> <%= friendship.friend.last_name%>
+                    <a href="/friendship/<%= friendship.friend.id %>" data-method='delete' data-confirm='Are you sure to unfriend?'>
+                      <span class="unfriend"><i class="small material-icons">remove_circle</i>Unfriend</span></a>
+                  </h5>
+                </a></div>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+
     </div>
-</main>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </main>
 
-<footer id="footer">
+<footer style="position:fixed"; id="footer">
   <div class="row">
     <div class="col s8">
       <h5 class="white-text">The Space</h5>

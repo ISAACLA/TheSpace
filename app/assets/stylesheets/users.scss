@@ -23,8 +23,17 @@ body.user_edit{
 }
 
 body.user_profile{
-  background-color: black;
+  background: url(/profile.jpg);
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+  background-color: rgba(31, 52, 238, 0.48);
   color: rgb(255, 253, 208);
+  // background-color: black;
+  // background-color: blue;
+  color: rgb(255, 253, 208);
+  // height: 100%;
   // color: rgb(114, 235, 199);
 }
 
@@ -195,4 +204,94 @@ ul.scroll {
   51%,63% {transform:translateY(-75%);}
   68%,80% {transform:translateY(-50%);}
   85%,97% {transform:translateY(-25%);}
+}
+
+
+#sidebar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 12%;
+  background-color: rgba(48, 44, 43, 0.7);
+  position: absolute;
+  overflow: auto;
+  bottom: 100px;
+  top: 121px;
+  left: 0px;
+  text-align:center;
+}
+
+.side-item {
+  margin-top: 40px;
+  font-size: large;
+}
+
+.side-item{
+  display: block;
+  text-decoration: none;
+  color: #fffdd0;
+  padding: 8px 0 8px 0;
+  font-family: Verdana;
+  margin-top: 5px;
+}
+
+.side-item a{
+  color: #fffdd0;
+}
+
+.side-item:hover {
+  cursor: pointer;
+  border-bottom: 5px solid lightblue;
+  // color: white;
+}
+
+.profile_event_body{
+  // display:none;
+  background-color: rgba(91, 87, 86, 0.6);
+  color: rgb(255, 253, 208);
+  border: 1px solid rgb(255, 253, 208);
+  height: auto;
+  padding: 3%;
+  // text-align: center;
+}
+
+
+.profile_event_header:hover{
+  cursor: pointer;
+}
+
+.profile_event_header{
+  background-color: rgba(48, 44, 43, 0.7);
+  // text-align: center;
+  font-size: x-large;
+  height: 80px;
+  padding: 3%;
+  border: 1px solid rgb(255, 253, 208);
+}
+
+#profile_attending{
+  height: 800px;
+  overflow-y: scroll;
+  padding: 5%;
+}
+
+#profile_hosting{
+  height: 800px;
+  overflow-y: scroll;
+  padding: 5%;
+}
+
+#profile_friends_header{
+  background-color: rgba(48, 44, 43, 0.7);
+  text-align: center;
+}
+
+#my_friend{
+  background-color: rgba(91, 87, 86, 0.6);
+}
+
+.unfriend{
+  font-style:italic;
+  font-size:smaller;
+  float:right;
 }
