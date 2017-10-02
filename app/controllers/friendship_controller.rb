@@ -1,4 +1,6 @@
 class FriendshipController < ApplicationController
+  before_action :require_login
+  
   def create
     @user = User.find(current_user.id)
     # @image = Image.find(params[:id])

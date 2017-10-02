@@ -1,4 +1,6 @@
 class ImageController < ApplicationController
+  before_action :require_login, only: [:new, :create, :imageshow]
+  
   def show
     if current_user
       @user = User.find(current_user.id)

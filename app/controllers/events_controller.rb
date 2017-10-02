@@ -1,4 +1,7 @@
 class EventsController < ApplicationController
+  before_action :require_login
+  before_action :require_correct_user, only: [:edit, :update, :destroy]
+
   def index
     @user = User.find(current_user.id)
     @my_state_events = Event.where(state:"#{@user.state}").order(created_at: :desc)

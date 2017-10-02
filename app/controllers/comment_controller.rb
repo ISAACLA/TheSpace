@@ -1,4 +1,6 @@
 class CommentController < ApplicationController
+  before_action :require_login
+
   def imagecomment
     @image = Image.find(params[:id])
     @comment = Comment.new (comment_params)

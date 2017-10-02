@@ -38,4 +38,8 @@ document.addEventListener('turbolinks:load', function(){
       }
     });
   })
+
+  $('#apod_header').click(function(){
+    $('#apod_body').toggle('slow')
+  })
 });

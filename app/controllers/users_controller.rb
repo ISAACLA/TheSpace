@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
+    before_action :require_login, only: [:main, :show, :profile, :edit, :update, :userimages]
+    before_action :require_correct_user_users, only: [:edit, :update]
 
   def create
     @user = User.new(user_params)
     if @user.save
-      # session[:user_id]=@user.id
+      session[:user_id]=@user.id
       flash[:notice]=['You have successfully registerred your account, please now login']
       redirect_to '/login'
     else
@@ -13,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def main
-    @user = User.find(current_user.id)
+    @user = User.find(session[:user_id])
     @my_state_events = Event.where(state:"#{@user.state}").order(created_at: :desc)
     @other_events = Event.where.not(state:"#{@user.state}").order(created_at: :desc)
 
@@ -22,14 +24,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    @currentuser = User.find(current_user.id)
+    @currentuser = User.find(session[:user_id])
     @user = User.find(params[:id])
     @events = Event.where(user_id:@user.id)
     @attending = Attendee.where(user_id:@user.id)
   end
 
   def profile
-    @user = User.find(current_user)
+    @user = User.find(session[:user_id])
     @images = Image.where(user_id:current_user.id).order(created_at: :desc)
 
     @events = Event.where(user_id: @user.id)
@@ -37,11 +39,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(current_user)
+    @user = User.find(session[:user_id])
   end
 
   def update
-    @user = User.find(current_user)
+    @user = User.find(session[:user_id])
     @user.update(user_params)
     if @user.save
       flash[:notice]=["You have updated your profile"]

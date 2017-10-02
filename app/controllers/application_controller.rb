@@ -8,4 +8,18 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :current_user
+
+  def require_login
+    redirect_to '/login' unless session[:user_id]
+  end
+
+  def require_correct_user
+    event = Event.find(params[:id])
+    redirect_to "/users/#{current_user.id}/profile" if current_user.id != event.user.id
+  end
+
+  def require_correct_user_users
+    user = User.find(params[:id])
+    redirect_to "/users/#{current_user.id}/profile" if current_user.id != user.id
+  end
 end

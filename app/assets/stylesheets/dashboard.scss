@@ -138,4 +138,15 @@ ul.scroll {
 
 #righttext{
   padding-right: 4%;
+  text-align: center
+}
+
+#apod_body{
+  border: 1px solid rgb(255, 253, 208);
+  padding: 3%;
+  border-radius: 3px
+}
+
+#apod_header:hover{
+  cursor: pointer;
 }
